@@ -1,9 +1,10 @@
 package com.tangtang.benchmark.testinputstream;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import org.junit.jupiter.api.Test;
 
 /**
  * @author tangwenbo

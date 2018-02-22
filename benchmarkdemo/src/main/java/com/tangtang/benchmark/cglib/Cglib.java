@@ -1,9 +1,10 @@
 package com.tangtang.benchmark.cglib;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
 
 /**
  * @author tangwenbo
