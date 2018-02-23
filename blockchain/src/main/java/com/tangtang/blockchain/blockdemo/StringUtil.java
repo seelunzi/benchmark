@@ -4,6 +4,11 @@ import com.google.gson.GsonBuilder;
 
 import java.security.MessageDigest;
 
+/**
+ * @author tangwenbo
+ * @date 2018/2/23
+ * @since JDK1.8
+ */
 public class StringUtil {
 
     /***

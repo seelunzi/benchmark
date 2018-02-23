@@ -1,6 +1,10 @@
 package com.tangtang.blockchain.blockdemo;
 
-
+/**
+ * @author tangwenbo
+ * @date 2018/2/23
+ * @since JDK1.8
+ */
 public class Block {
 
     public String hash;

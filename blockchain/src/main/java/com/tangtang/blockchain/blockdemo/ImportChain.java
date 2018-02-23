@@ -2,6 +2,11 @@ package com.tangtang.blockchain.blockdemo;
 
 import java.util.ArrayList;
 
+/**
+ * @author tangwenbo
+ * @date 2018/2/23
+ * @since JDK1.8
+ */
 public class ImportChain {
 
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
