@@ -10,6 +10,7 @@
 
     <modules>
         <module>benchmarkdemo</module>
+        <module>nettyexample</module>
     </modules>
 
 
