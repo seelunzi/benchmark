@@ -44,7 +44,6 @@ public class WebsocketChatServer {
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
-
             System.out.println("WebsocketChatServer 关闭了");
         }
     }
@@ -57,6 +56,5 @@ public class WebsocketChatServer {
             port = 8080;
         }
         new WebsocketChatServer(port).run();
-
     }
 }

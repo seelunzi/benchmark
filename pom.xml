@@ -11,6 +11,7 @@
     <modules>
         <module>benchmarkdemo</module>
         <module>nettyexample</module>
+        <module>blockchain</module>
     </modules>
 
 
