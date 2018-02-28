@@ -12,7 +12,6 @@
         <module>benchmarkdemo</module>
         <module>nettyexample</module>
         <module>blockchain</module>
+        <module>elasticsearchexample</module>
     </modules>
-
-
 </project>
