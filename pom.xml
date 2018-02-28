@@ -13,5 +13,6 @@
         <module>nettyexample</module>
         <module>blockchain</module>
         <module>elasticsearchexample</module>
+        <module>spring-boot-with-mybatis</module>
     </modules>
 </project>

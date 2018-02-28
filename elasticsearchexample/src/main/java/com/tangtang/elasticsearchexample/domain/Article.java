@@ -5,9 +5,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by tianshouzhi on 2018/1/4.
- */
 @Document(indexName = "projectname", type = "article", indexStoreType = "fs", shards = 5, replicas = 1, refreshInterval = "-1")
 public class Article implements Serializable {
     private Long id;

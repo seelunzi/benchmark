@@ -2,9 +2,6 @@ package com.tangtang.elasticsearchexample.domain;
 
 import java.io.Serializable;
 
-/**
- * Created by tianshouzhi on 2018/1/4.
- */
 public class Author implements Serializable {
     private Long id;
 
