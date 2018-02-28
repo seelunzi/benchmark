@@ -14,5 +14,6 @@
         <module>blockchain</module>
         <module>elasticsearchexample</module>
         <module>spring-boot-with-mybatis</module>
+        <module>lockcoin-tmall</module>
     </modules>
 </project>
