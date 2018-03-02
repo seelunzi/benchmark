@@ -15,5 +15,6 @@
         <module>elasticsearchexample</module>
         <module>spring-boot-with-mybatis</module>
         <module>lockcoin-tmall</module>
+        <module>jfinal-weixin</module>
     </modules>
 </project>
