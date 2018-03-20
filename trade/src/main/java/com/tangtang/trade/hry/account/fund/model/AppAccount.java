@@ -1,78 +1,29 @@
-/*     */
+
 package com.tangtang.trade.hry.account.fund.model;
-/*     */
-/*     */
 
-import hry.core.mvc.model.BaseModel;
-import hry.customer.person.model.AppPersonInfo;
+import com.tangtang.trade.hry.core.mvc.model.BaseModel;
 
-import javax.persistence.*;
+import java.beans.Transient;
 import java.math.BigDecimal;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
 @Table(name = "app_account")
-/*     */ public class AppAccount
-        /*     */ extends BaseModel
-        /*     */ {
-    /*     */
+public class AppAccount
+        extends BaseModel {
+
     @Id
-    /*     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    /*     */
     @Column(name = "id", unique = true, nullable = false)
-    /*     */ private Long id;
-    /*     */
+    private Long id;
+
     @Column(name = "website")
-    /*     */ private String website;
-    /*     */
+    private String website;
+
     @Column(name = "customerId")
-    /*     */ private Long customerId;
-    /*     */
+    private Long customerId;
+
     @Column(name = "userName")
-    /*     */ private String userName;
-    /*     */
+    private String userName;
+
     @Column(name = "hotMoney")
     /*     */ private BigDecimal hotMoney;
     /*     */
@@ -603,26 +554,11 @@ import java.math.BigDecimal;
         /*     */
     }
 
-    /*     */
-    /*     */
     public BigDecimal getHasRewardMoney() {
-        /* 397 */
         return this.hasRewardMoney;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public void setHasRewardMoney(BigDecimal hasRewardMoney) {
-        /* 401 */
         this.hasRewardMoney = hasRewardMoney;
-        /*     */
     }
-    /*     */
 }
-
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\account\fund\model\AppAccount.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -1,9 +1,7 @@
-/*      */
-package com.tangtang.trade.hry.customer.person.model;
-/*      */
-/*      */
 
-import hry.core.mvc.model.BaseModel;
+package com.tangtang.trade.hry.customer.person.model;
+
+import com.tangtang.trade.hry.core.mvc.model.BaseModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

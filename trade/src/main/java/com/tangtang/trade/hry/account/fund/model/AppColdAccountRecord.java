@@ -1,48 +1,10 @@
-/*     */
+
 package com.tangtang.trade.hry.account.fund.model;
-/*     */
-/*     */
 
-import hry.core.mvc.model.BaseModel;
+import com.tangtang.trade.hry.core.mvc.model.BaseModel;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
 @Table(name = "app_cold_account_record")
 /*     */ public class AppColdAccountRecord
         /*     */ extends BaseModel
@@ -241,11 +203,6 @@ import java.math.BigDecimal;
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
     public void setTransactionMoney(BigDecimal transactionMoney)
     /*     */ {
         /* 175 */
@@ -253,28 +210,12 @@ import java.math.BigDecimal;
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getTransactionNum()
-    /*     */ {
-        /* 183 */
+    public String getTransactionNum() {
         return this.transactionNum;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setTransactionNum(String transactionNum)
-    /*     */ {
-        /* 191 */
+    public void setTransactionNum(String transactionNum) {
         this.transactionNum = transactionNum;
-        /*     */
     }
 
     /*     */

@@ -1,75 +1,10 @@
-/*     */
-package com.tangtang.trade.hry.exchange.product.model;
-/*     */
-/*     */
 
-import hry.core.mvc.model.BaseModel;
+package com.tangtang.trade.hry.exchange.product.model;
+
+import com.tangtang.trade.hry.core.mvc.model.BaseModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
 @Table(name = "ex_cointo_coin")
 /*     */ public class ExCointoCoin
         /*     */ extends BaseModel
@@ -552,55 +487,26 @@ import java.math.BigDecimal;
     /*     */
     /*     */
     public String getFixPriceCoinCode() {
-        /* 333 */
         return this.fixPriceCoinCode;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public void setFixPriceCoinCode(String fixPriceCoinCode) {
-        /* 337 */
         this.fixPriceCoinCode = fixPriceCoinCode;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public Integer getKeepDecimalFixPrice() {
-        /* 341 */
         return this.keepDecimalFixPrice;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public void setKeepDecimalFixPrice(Integer keepDecimalFixPrice) {
-        /* 345 */
         this.keepDecimalFixPrice = keepDecimalFixPrice;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public Integer getFixPriceType() {
-        /* 349 */
         return this.fixPriceType;
-        /*     */
     }
 
-    /*     */
-    /*     */
     public void setFixPriceType(Integer fixPriceType) {
-        /* 353 */
         this.fixPriceType = fixPriceType;
-        /*     */
     }
-    /*     */
 }
-
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\exchange\product\model\ExCointoCoin.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -1,7 +1,5 @@
-/*     */
+
 package com.tangtang.trade.hry.core.mvc.model;
-/*     */
-/*     */
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
@@ -9,41 +7,6 @@ import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
 @MappedSuperclass
 /*     */ public class BaseExModel
         /*     */ implements Serializable
@@ -219,9 +182,3 @@ import java.util.Date;
     }
     /*     */
 }
-
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\core\mvc\model\BaseExModel.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

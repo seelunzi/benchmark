@@ -19,20 +19,20 @@ public class AppException
     @Column(name = "name")
     private String name;
     @Column(name = "notes")
-    /*     */ private String notes;
-    /*     */
+    private String notes;
+
     @Column(name = "type")
-    /*     */ private String type;
-    /*     */
+    private String type;
+
     @Column(name = "ip")
-    /*     */ private String ip;
-    /*     */
+    private String ip;
+
     @Column(name = "parameter")
-    /*     */ private String parameter;
-    /*     */
+    private String parameter;
+
     @Column(name = "requestmethod")
-    /*     */ private String requestmethod;
-    /*     */
+    private String requestmethod;
+
     @Column(name = "requestaddress")
     /*     */ private String requestaddress;
 
@@ -45,11 +45,7 @@ public class AppException
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
+
     public void setId(Long id)
     /*     */ {
         /*  88 */
@@ -69,11 +65,7 @@ public class AppException
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
+
     public void setName(String name)
     /*     */ {
         /* 104 */
@@ -81,11 +73,7 @@ public class AppException
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
+
     public String getNotes()
     /*     */ {
         /* 112 */
@@ -153,82 +141,34 @@ public class AppException
         /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
+
     public String getParameter()
     /*     */ {
         /* 160 */
         return this.parameter;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setParameter(String parameter)
-    /*     */ {
-        /* 168 */
+    public void setParameter(String parameter) {
         this.parameter = parameter;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getRequestmethod()
-    /*     */ {
-        /* 176 */
+    public String getRequestmethod() {
         return this.requestmethod;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setRequestmethod(String requestmethod)
-    /*     */ {
-        /* 184 */
+
+    public void setRequestmethod(String requestmethod) {
         this.requestmethod = requestmethod;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getRequestaddress()
-    /*     */ {
-        /* 192 */
+
+    public String getRequestaddress() {
         return this.requestaddress;
-        /*     */
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setRequestaddress(String requestaddress)
-    /*     */ {
-        /* 200 */
+    public void setRequestaddress(String requestaddress) {
         this.requestaddress = requestaddress;
-        /*     */
     }
-    /*     */
+
 }
 
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\core\mvc\model\log\AppException.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

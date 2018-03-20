@@ -7,6 +7,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
 	<name>hurong_trade</name>
 
 	<properties>
@@ -19,6 +26,11 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -60,50 +72,74 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.4.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.4.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.4.BUILD-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.0.4.BUILD-SNAPSHOT</version>
+		</dependency>
 
 
 		<!-- ***************************内部依赖***************************** -->
 
 
-		<dependency>
-			<groupId>hry.exchange.trunck3</groupId>
-			<artifactId>hurong_trunk_trade_api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>hurong_base</groupId>
-			<artifactId>hurong_base</artifactId>
-			<version>0.0.1-RELEASES</version>
-		</dependency>
-		<dependency>
-			<groupId>hurong_core</groupId>
-			<artifactId>hurong_core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>hurong_model</groupId>
-					<artifactId>hurong_model</artifactId>
-				</exclusion>
+		<!--<dependency>-->
+		<!--<groupId>hry.exchange.trunck3</groupId>-->
+		<!--<artifactId>hurong_trunk_trade_api</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		<!--<groupId>hurong_base</groupId>-->
+		<!--<artifactId>hurong_base</artifactId>-->
+		<!--<version>0.0.1-RELEASES</version>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		<!--<groupId>hurong_core</groupId>-->
+		<!--<artifactId>hurong_core</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+		<!--<exclusions>-->
+		<!--<exclusion>-->
+		<!--<groupId>hurong_model</groupId>-->
+		<!--<artifactId>hurong_model</artifactId>-->
+		<!--</exclusion>-->
 
-				<exclusion>
-					<groupId>hurong_mongo</groupId>
-					<artifactId>hurong_mongo</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!--<exclusion>-->
+		<!--<groupId>hurong_mongo</groupId>-->
+		<!--<artifactId>hurong_mongo</artifactId>-->
+		<!--</exclusion>-->
+		<!--</exclusions>-->
+		<!--</dependency>-->
 
-
-		<dependency>
-			<groupId>hurong_utils</groupId>
-			<artifactId>hurong_utils</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>hurong_model</groupId>
-					<artifactId>hurong_model</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!--<dependency>-->
+		<!--<groupId>hurong_utils</groupId>-->
+		<!--<artifactId>hurong_utils</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+		<!--<exclusions>-->
+		<!--<exclusion>-->
+		<!--<groupId>hurong_model</groupId>-->
+		<!--<artifactId>hurong_model</artifactId>-->
+		<!--</exclusion>-->
+		<!--</exclusions>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+		<!--<groupId>cn.hutool</groupId>-->
+		<!--<artifactId>hutool-all</artifactId>-->
+		<!--<version>4.0.5</version>-->
+		<!--</dependency>-->
 
 	</dependencies>
 
@@ -348,12 +384,12 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<version>3.0</version>
-				</configuration>
-			</plugin>
+			<!--<plugin>-->
+			<!--<artifactId>maven-war-plugin</artifactId>-->
+			<!--<configuration>-->
+			<!--<version>3.0</version>-->
+			<!--</configuration>-->
+			<!--</plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

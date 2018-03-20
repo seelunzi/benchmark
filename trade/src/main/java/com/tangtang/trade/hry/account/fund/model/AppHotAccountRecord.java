@@ -5,7 +5,6 @@ package com.tangtang.trade.hry.account.fund.model;
 
 import hry.core.mvc.model.BaseModel;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 /*     */

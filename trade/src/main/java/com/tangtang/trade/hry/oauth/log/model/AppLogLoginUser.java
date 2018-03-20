@@ -208,9 +208,3 @@ import java.util.Date;
     }
     /*     */
 }
-
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\oauth\log\model\AppLogLoginUser.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

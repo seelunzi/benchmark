@@ -1,45 +1,19 @@
 /*    */
 package com.tangtang.trade.hry.trade.listener;
-/*    */
-/*    */
 
-import com.github.pagehelper.StringUtil;
+
+import com.tangtang.trade.hry.trade.entrust.service.ExEntrustService;
 import hry.core.quartz.QuartzJob;
 import hry.core.quartz.QuartzManager;
 import hry.core.quartz.ScheduleJob;
+import hry.core.util.StringUtil;
 import hry.core.util.log.LogFactory;
 import hry.core.util.properties.PropertiesUtils;
 import hry.core.util.sys.AppUtils;
 import hry.core.util.sys.ContextUtil;
-import hry.trade.entrust.service.ExEntrustService;
-import org.springframework.web.context.ContextLoaderListener;
 
 import javax.servlet.ServletContextEvent;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
 /*    */
 /*    */ public class StartupListener
         /*    */ extends ContextLoaderListener
@@ -118,24 +92,9 @@ import javax.servlet.ServletContextEvent;
         /*    */
         /* 74 */
         ScheduleJob jobRunTimepushMarket = new ScheduleJob();
-        /* 75 */
         jobRunTimepushMarket.setSpringId("webSocketScheduleService");
-        /* 76 */
         jobRunTimepushMarket.setMethodName("pushMarket");
-        /* 77 */
-        QuartzManager.addJob("jobRunTimepushMarket", jobRunTimepushMarket, QuartzJob.class, "0/1 * * * * ?");
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /* 87 */
         ExEntrustService exEntrustService = (ExEntrustService) ContextUtil.getBean("exEntrustService");
-        /* 88 */
         long start1 = System.currentTimeMillis();
         /* 89 */
         exEntrustService.tradeInit();
@@ -149,9 +108,3 @@ import javax.servlet.ServletContextEvent;
     }
     /*    */
 }
-
-
-/* Location:              E:\trade.war!\WEB-INF\classes\hry\trade\listener\StartupListener.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

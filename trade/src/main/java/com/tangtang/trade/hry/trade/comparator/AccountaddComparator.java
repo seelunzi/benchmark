@@ -1,16 +1,11 @@
 /*    */
 package com.tangtang.trade.hry.trade.comparator;
-/*    */
-/*    */
+
 
 import hry.trade.redis.model.Accountadd;
 
 import java.util.Comparator;
 
-/*    */
-/*    */
-/*    */
-/*    */
 /*    */ public class AccountaddComparator
         /*    */ implements Comparator<Accountadd>
         /*    */ {

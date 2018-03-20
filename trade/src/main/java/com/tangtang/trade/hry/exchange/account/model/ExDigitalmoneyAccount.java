@@ -1,24 +1,10 @@
-/*     */
-package com.tangtang.trade.hry.exchange.account.model;
-/*     */
-/*     */
 
-import hry.core.mvc.model.BaseModel;
-import hry.customer.person.model.AppPersonInfo;
+package com.tangtang.trade.hry.exchange.account.model;
+
+import com.tangtang.trade.hry.core.mvc.model.BaseModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
 @Table(name = "ex_digitalmoney_account")
 /*     */ public class ExDigitalmoneyAccount
         /*     */ extends BaseModel
