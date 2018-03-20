@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+						http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+
+    <rabbit:connection-factory id="connectionFactory"
+                               host="${rabbitmq.url}" port="${rabbitmq.port}" username="${rabbitmq.username}"
+                               password="${rabbitmq.password}"
+                               virtual-host="${rabbitmq.virtual-host}"/>
+
+    <!--通过指定下面的admin信息，当前producer中的exchange和queue会在rabbitmq服务器上自动生成 -->
+    <rabbit:admin id="connectAdmin" connection-factory="connectionFactory"/>
+
+
+    <!--定义queue -->
+    <rabbit:queue name="queueTest" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+    <!-- 消息接收者 -->
+    <bean id="messageReceiver" class="hry.trade.mq.MessageConsumer"></bean>
+    <!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+    <rabbit:listener-container connection-factory="connectionFactory" requeue-rejected="false">
+        <rabbit:listener queues="queueTest" ref="messageReceiver"/>
+    </rabbit:listener-container>
+
+
+    <!-- 定义生产者 -->
+    <!--定义queue -->
+    <!--定义queue -->
+    <rabbit:queue name="toTrade" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+    <rabbit:queue name="toAccount" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+    <rabbit:queue name="reidsToRedisLog" durable="true" auto-delete="false" exclusive="false"
+                  declared-by="connectAdmin"/>
+    <rabbit:queue name="reidsToMysql" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
+
+    <!-- 定义direct exchange，绑定queueTest -->
+    <rabbit:direct-exchange name="exchangeToTrade" durable="true" auto-delete="false" declared-by="connectAdmin">
+        <rabbit:bindings>
+            <rabbit:binding queue="toTrade" key="toTradeKey"></rabbit:binding>
+            <rabbit:binding queue="toAccount" key="toAccountKey"></rabbit:binding>
+            <rabbit:binding queue="reidsToRedisLog" key="reidsToRedisLogKey"></rabbit:binding>
+            <rabbit:binding queue="reidsToMysql" key="reidsToMysqlKey"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!--定义rabbit template用于数据的接收和发送 -->
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="exchangeToTrade"/>
+
+
+    <!-- 消息接收者 -->
+    <bean id="messageTrade" class="hry.trade.mq.MessageTrade"></bean>
+    <bean id="messageAccount" class="hry.trade.mq.MessageAccount"></bean>
+    <bean id="messageReidsToRedisLog" class="hry.trade.mq.MessageReidsToRedisLog"></bean>
+    <bean id="messageReidsToMysql" class="hry.trade.mq.MessageReidsToMysql"></bean>
+    <rabbit:listener-container connection-factory="connectionFactory" requeue-rejected="false" acknowledge="auto">
+        <rabbit:listener queues="toTrade" ref="messageTrade"/>
+        <rabbit:listener queues="reidsToRedisLog" ref="messageReidsToRedisLog"/>
+        <rabbit:listener queues="reidsToMysql" ref="messageReidsToMysql"/>
+    </rabbit:listener-container>
+
+    <rabbit:listener-container connection-factory="connectionFactory" requeue-rejected="false" acknowledge="manual">
+        <rabbit:listener queues="toAccount" ref="messageAccount"/>
+    </rabbit:listener-container>
+
+</beans>
+
+
