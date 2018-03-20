@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.oauth.log.model;
-/*     */
-/*     */
+
 
 import hry.core.mvc.model.BaseModel;
 
