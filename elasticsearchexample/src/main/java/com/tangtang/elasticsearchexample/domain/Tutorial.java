@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/***
+ * @author tang
+ * */
 @Data
 public class Tutorial implements Serializable {
 
