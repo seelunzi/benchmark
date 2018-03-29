@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hry.trade.entrust.dao.CommonDao">
+
+    <resultMap id="getAppcustomer" type="hry.customer.user.model.AppCustomer">
+        <result column="customerId" property="customerId" javaType="java.lang.Long"/>
+    </resultMap>
+    <select id="getAppUserByuserName" parameterType="java.util.Map" resultMap="getAppcustomer">
+    
+        select * from app_customer a where a.userName=#{userName,jdbcType=VARCHAR}  
+    </select>
+
+
+    <resultMap id="getExcointocoin" type="hry.exchange.product.model.ExCointoCoin">
+        <result column="autoUsername" property="autoUsername" javaType="java.lang.String"/>
+        <result column="customerId" property="customerId" javaType="java.lang.Long"/>
+        <result column="autoCount" property="autoCount" javaType="java.math.BigDecimal"/>
+        <result column="autoCountFloat" property="autoCountFloat" javaType="java.math.BigDecimal"/>
+        <result column="autoPrice" property="autoPrice" javaType="java.math.BigDecimal"/>
+        <result column="autoPriceFloat" property="autoPriceFloat" javaType="java.math.BigDecimal"/>
+        <result column="isSratAuto" property="isSratAuto" javaType="java.lang.Integer"/>
+        <result column="isFromChbtc" property="isFromChbtc" javaType="java.lang.Integer"/>
+
+    </resultMap>
+    <select id="getExointocoinValid" parameterType="java.util.Map" resultMap="getExcointocoin">
+    
+       select * from ex_cointo_coin a where a.state=1 
+    </select>
+</mapper>
