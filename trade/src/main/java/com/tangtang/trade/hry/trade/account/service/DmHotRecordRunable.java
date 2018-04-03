@@ -1,49 +1,27 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service;
-/*    */
-/*    */
+
 
 import hry.core.util.sys.ContextUtil;
 import hry.exchange.account.model.ExDmHotAccountRecord;
 import org.apache.log4j.Logger;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class DmHotRecordRunable
-        /*    */ implements Runnable
-        /*    */ {
-    /* 22 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
-    /*    */
-    /*    */   private ExDmHotAccountRecord exDmHotAccountRecord;
 
-    /*    */
-    /*    */
-    /*    */
-    public DmHotRecordRunable(ExDmHotAccountRecord exDmHotAccountRecord)
-    /*    */ {
+public class DmHotRecordRunable
+        implements Runnable {
+    /* 22 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
+
+    private ExDmHotAccountRecord exDmHotAccountRecord;
+
+
+    public DmHotRecordRunable(ExDmHotAccountRecord exDmHotAccountRecord) {
         /* 29 */
         this.exDmHotAccountRecord = exDmHotAccountRecord;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    public void run()
-    /*    */ {
+
+    public void run() {
         /* 35 */
         long start = System.currentTimeMillis();
         /* 36 */
@@ -54,9 +32,9 @@ import org.apache.log4j.Logger;
         exDmHotAccountRecordService.save(this.exDmHotAccountRecord);
         /* 39 */
         long end = System.currentTimeMillis();
-        /*    */
+
     }
-    /*    */
+
 }
 
 

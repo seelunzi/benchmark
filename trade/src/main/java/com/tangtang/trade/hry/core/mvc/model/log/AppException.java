@@ -4,11 +4,7 @@ import hry.core.mvc.model.BaseModel;
 
 import javax.persistence.*;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
+
 @Table(name = "app_exception")
 public class AppException
         extends BaseModel {
@@ -34,116 +30,80 @@ public class AppException
     private String requestmethod;
 
     @Column(name = "requestaddress")
-    /*     */ private String requestaddress;
+    private String requestaddress;
 
-    /*     */
-    /*     */
-    public Long getId()
-    /*     */ {
+
+    public Long getId() {
         /*  80 */
         return this.id;
-        /*     */
+
     }
 
 
-    public void setId(Long id)
-    /*     */ {
+    public void setId(Long id) {
         /*  88 */
         this.id = id;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getName()
-    /*     */ {
+
+    public String getName() {
         /*  96 */
         return this.name;
-        /*     */
+
     }
 
 
-    public void setName(String name)
-    /*     */ {
+    public void setName(String name) {
         /* 104 */
         this.name = name;
-        /*     */
+
     }
 
 
-    public String getNotes()
-    /*     */ {
+    public String getNotes() {
         /* 112 */
         return this.notes;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setNotes(String notes)
-    /*     */ {
+
+    public void setNotes(String notes) {
         /* 120 */
         this.notes = notes;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getType()
-    /*     */ {
+
+    public String getType() {
         /* 128 */
         return this.type;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setType(String type)
-    /*     */ {
+
+    public void setType(String type) {
         /* 136 */
         this.type = type;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getIp()
-    /*     */ {
+
+    public String getIp() {
         /* 144 */
         return this.ip;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setIp(String ip)
-    /*     */ {
+
+    public void setIp(String ip) {
         /* 152 */
         this.ip = ip;
-        /*     */
+
     }
 
 
-    public String getParameter()
-    /*     */ {
+    public String getParameter() {
         /* 160 */
         return this.parameter;
     }

@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+/***
+ * @author tang
+ * */
 @Configuration
 public class DruidConfiguration {
     @Value("${spring.datasource.driverClassName}")

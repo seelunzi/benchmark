@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.entrust.service.impl;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.account.fund.model.AppAccount;
@@ -36,159 +35,75 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-@org.springframework.stereotype.Service("exOrderInfoService")
-/*     */ public class ExOrderInfoServiceImpl extends hry.core.mvc.service.base.impl.BaseServiceImpl<ExOrderInfo, Long> implements ExOrderInfoService
-        /*     */ {
-    /*     */
-    @Resource(name = "exOrderService")
-    /*     */ public hry.trade.entrust.service.ExOrderService exOrderService;
-    /*     */
-    @Resource
-    /*     */ public ExEntrustService exEntrustService;
-    /*     */
-    @Resource
-    /*     */ private RedisService redisService;
-    /*     */
-    @Resource
-    /*     */ private ExOrderInfoService exOrderInfoService;
-    /*     */
-    @Resource
-    /*     */ public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
-    /*     */
-    @Resource
-    /*     */ public AppAccountService appAccountService;
-    /*     */
-    @Resource
-    /*     */ public ExDigitalmoneyAccountDao exDigitalmoneyAccountDao;
-    /*     */
-    @Resource
-    /*     */ public AppAccountDao appAccountDao;
-    /*     */
-    @Resource
-    /*     */ private ExEntrustDao exEntrustDao;
-    /*     */
-    @Resource
-    /*     */ private ExOrderInfoDao exOrderInfoDao;
-    /*     */
-    @Resource
-    /*     */ private hry.trade.account.service.ExDmColdAccountRecordService exDmColdAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private hry.trade.account.service.ExDmHotAccountRecordService exDmHotAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private hry.trade.account.service.AppColdAccountRecordService appColdAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private AppHotAccountRecordService appHotAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private ExDmColdAccountRecordDao exDmColdAccountRecordDao;
-    /*     */
-    @Resource
-    /*     */ private ExDmHotAccountRecordDao exDmHotAccountRecordDao;
-    /*     */
-    @Resource
-    /*     */ private AppColdAccountRecordDao appColdAccountRecordDao;
-    /*     */
-    @Resource
-    /*     */ private AppHotAccountRecordDao appHotAccountRecordDao;
 
-    /*     */
-    /*     */
+@org.springframework.stereotype.Service("exOrderInfoService")
+public class ExOrderInfoServiceImpl extends hry.core.mvc.service.base.impl.BaseServiceImpl<ExOrderInfo, Long> implements ExOrderInfoService {
+
+    @Resource(name = "exOrderService")
+    public hry.trade.entrust.service.ExOrderService exOrderService;
+
+    @Resource
+    public ExEntrustService exEntrustService;
+
+    @Resource
+    private RedisService redisService;
+
+    @Resource
+    private ExOrderInfoService exOrderInfoService;
+
+    @Resource
+    public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
+
+    @Resource
+    public AppAccountService appAccountService;
+
+    @Resource
+    public ExDigitalmoneyAccountDao exDigitalmoneyAccountDao;
+
+    @Resource
+    public AppAccountDao appAccountDao;
+
+    @Resource
+    private ExEntrustDao exEntrustDao;
+
+    @Resource
+    private ExOrderInfoDao exOrderInfoDao;
+
+    @Resource
+    private hry.trade.account.service.ExDmColdAccountRecordService exDmColdAccountRecordService;
+
+    @Resource
+    private hry.trade.account.service.ExDmHotAccountRecordService exDmHotAccountRecordService;
+
+    @Resource
+    private hry.trade.account.service.AppColdAccountRecordService appColdAccountRecordService;
+
+    @Resource
+    private AppHotAccountRecordService appHotAccountRecordService;
+
+    @Resource
+    private ExDmColdAccountRecordDao exDmColdAccountRecordDao;
+
+    @Resource
+    private ExDmHotAccountRecordDao exDmHotAccountRecordDao;
+
+    @Resource
+    private AppColdAccountRecordDao appColdAccountRecordDao;
+
+    @Resource
+    private AppHotAccountRecordDao appHotAccountRecordDao;
+
+
+
     @Resource(name = "exOrderInfoDao")
-    /*     */ public void setDao(BaseDao<ExOrderInfo, Long> dao)
-    /*     */ {
+    public void setDao(BaseDao<ExOrderInfo, Long> dao) {
         /*  89 */
         this.dao = dao;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public ExOrderInfo createExOrderInfo(Integer type, EntrustTrade buyExEntrust, EntrustTrade sellentrust, BigDecimal tradeCount, BigDecimal tradePrice)
-    /*     */ {
+
+    public ExOrderInfo createExOrderInfo(Integer type, EntrustTrade buyExEntrust, EntrustTrade sellentrust, BigDecimal tradeCount, BigDecimal tradePrice) {
         /* 132 */
         ExOrderInfo exOrderInfo = new ExOrderInfo();
         /* 133 */
@@ -229,13 +144,13 @@ import java.util.*;
         exOrderInfo.setFixPriceType(buyExEntrust.getFixPriceType());
         /* 151 */
         exOrderInfo.setCoinCode(buyExEntrust.getCoinCode());
-        /*     */
-        /*     */
+
+
         /* 154 */
         exOrderInfo.setBuyEntrustNum(buyExEntrust.getEntrustNum());
         /* 155 */
         exOrderInfo.setSellEntrustNum(sellentrust.getEntrustNum());
-        /*     */
+
         /* 157 */
         exOrderInfo.setBuyUserName(buyExEntrust.getUserName());
         /* 158 */
@@ -244,20 +159,16 @@ import java.util.*;
         exOrderInfo.setTransactionTime(new Date());
         /* 160 */
         exOrderInfo.setOrderTimestapm(Long.valueOf(exOrderInfo.getTransactionTime().getTime()));
-        /*     */
-        /*     */
-        /*     */
+
+
+
         /* 164 */
         return exOrderInfo;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public ExOrder createExOrder(ExOrderInfo exOrderInfo)
-    /*     */ {
+
+    public ExOrder createExOrder(ExOrderInfo exOrderInfo) {
         /* 171 */
         ExOrder exOrder = new ExOrder();
         /* 172 */
@@ -292,21 +203,18 @@ import java.util.*;
         exOrder.setFixPriceCoinCode(exOrderInfo.getFixPriceCoinCode());
         /* 187 */
         exOrder.setFixPriceType(exOrderInfo.getFixPriceType());
-        /*     */
-        /*     */
+
+
         /* 190 */
         return exOrder;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public void reidsToMysql()
-    /*     */ {
+
+    public void reidsToMysql() {
         /* 196 */
         long start = System.currentTimeMillis();
-        /*     */
+
         /* 198 */
         Map<String, EntrustTrade> map = new java.util.HashMap();
         /* 199 */
@@ -315,7 +223,7 @@ import java.util.*;
         Set<String> keysTradeDealEntrustChange = this.redisService.noPerkeys("deal:tradeDealEntrustChange:");
         /* 201 */
         long end4 = System.currentTimeMillis();
-        /*     */
+
         /* 203 */
         List<BigDecimal> list2 = new ArrayList();
         /* 204 */
@@ -328,7 +236,7 @@ import java.util.*;
             BigDecimal ks = new BigDecimal(keystr.split(":")[2]);
             /* 208 */
             list2.add(ks);
-            /*     */
+
         }
         /* 210 */
         java.util.Collections.sort(list2, new hry.trade.comparator.AscBigDecimalComparator());
@@ -338,7 +246,7 @@ import java.util.*;
         for (BigDecimal l : list2) {
             /* 213 */
             String keystr = "deal:tradeDealEntrustChange:" + l;
-            /*     */
+
             /* 215 */
             List<EntrustTrade> entrustTradeSlist = JSON.parseArray(this.redisService.get(keystr), EntrustTrade.class);
             /* 216 */
@@ -347,16 +255,16 @@ import java.util.*;
                 for (EntrustTrade es : entrustTradeSlist) {
                     /* 218 */
                     map.put(es.getEntrustNum(), es);
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 223 */
         long end5 = System.currentTimeMillis();
-        /*     */
+
         /* 225 */
         List<EntrustTrade> entrustlisted = new ArrayList(map.values());
         /* 226 */
@@ -394,22 +302,22 @@ import java.util.*;
                             if (null == entrusted.getProcessedPrice()) {
                                 /* 242 */
                                 entrustUpdate.setProcessedPriceDouble(Double.valueOf("0").doubleValue());
-                                /*     */
+
                             } else {
                                 /* 244 */
                                 entrustUpdate.setProcessedPriceDouble(entrusted.getProcessedPrice().doubleValue());
-                                /*     */
+
                             }
-                            /*     */
+
                             /* 247 */
                             entrustUpdate.setModified(new Date());
                             /* 248 */
                             i++;
                             /* 249 */
                             break;
-                            /*     */
+
                         }
-                        /*     */
+
                     }
                     /* 252 */
                     if (i == 0) {
@@ -417,77 +325,77 @@ import java.util.*;
                         if (null == entrusted.getProcessedPrice()) {
                             /* 254 */
                             entrusted.setProcessedPrice(new BigDecimal("0"));
-                            /*     */
+
                         }
                         /* 256 */
                         entrustnewlist.add(entrusted);
-                        /*     */
+
                     }
                     /* 258 */
                     k++;
-                    /*     */
+
                 }
-                /*     */
+
             } else {
                 /* 261 */
                 entrustnewlist = entrustlisted;
-                /*     */
+
             }
-            /*     */
+
             long end1;
             /* 264 */
             if ((null != entrustupdatelist) && (entrustupdatelist.size() > 0)) {
                 /* 265 */
                 long start1 = System.currentTimeMillis();
-                /*     */
+
                 /* 267 */
                 this.exEntrustDao.updateExEntrust(entrustupdatelist);
                 /* 268 */
                 end1 = System.currentTimeMillis();
-                /*     */
+
             }
-            /*     */
-            /*     */
+
+
             /* 272 */
             if ((null != entrustnewlist) && (entrustnewlist.size() > 0)) {
                 /* 273 */
                 long start2 = System.currentTimeMillis();
-                /*     */
+
                 /* 275 */
                 this.exEntrustDao.insertExEntrust(entrustnewlist);
                 /* 276 */
                 end2 = System.currentTimeMillis();
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* 306 */
         List<ExOrderInfo> eExOrderInfolistss = new ArrayList();
         /* 307 */
@@ -504,11 +412,11 @@ import java.util.*;
             if (null != accountaddSlist) {
                 /* 313 */
                 eExOrderInfolistss.addAll(accountaddSlist);
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         long end3;
         /* 317 */
         if ((null != eExOrderInfolistss) && (eExOrderInfolistss.size() > 0)) {
@@ -518,14 +426,14 @@ import java.util.*;
             this.exOrderInfoDao.insertExorderInfos(eExOrderInfolistss);
             /* 320 */
             end3 = System.currentTimeMillis();
-            /*     */
+
         }
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
+
+
         /* 328 */
         Iterator<String> keysTradeDealEntrustChangedelete = keysTradeDealEntrustChange.iterator();
         /* 329 */
@@ -534,9 +442,9 @@ import java.util.*;
             String keystr = (String) keysTradeDealEntrustChangedelete.next();
             /* 331 */
             this.redisService.delete(keystr);
-            /*     */
+
         }
-        /*     */
+
         /* 334 */
         Iterator<String> keysTradeDealOrderInfoChangedelete = keysTradeDealOrderInfoChange.iterator();
         /* 335 */
@@ -545,9 +453,9 @@ import java.util.*;
             String keystr = (String) keysTradeDealOrderInfoChangedelete.next();
             /* 337 */
             this.redisService.delete(keystr);
-            /*     */
+
         }
-        /*     */
+
         /* 340 */
         long end = System.currentTimeMillis();
         /* 341 */
@@ -556,15 +464,13 @@ import java.util.*;
         if (time > 800L) {
             /* 343 */
             LogFactory.info("redis(委托单和成交单)入库总耗时：" + time + "ms");
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public void reidsToredisLog()
-    /*     */ {
+
+    public void reidsToredisLog() {
         /* 349 */
         long start = System.currentTimeMillis();
         /* 350 */
@@ -587,11 +493,11 @@ import java.util.*;
             if (null != accountaddSlist) {
                 /* 359 */
                 accountaddSlistss.addAll(accountaddSlist);
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 363 */
         List<AppHotAccountRecord> listahar = new ArrayList();
         /* 364 */
@@ -624,10 +530,10 @@ import java.util.*;
                                 AppHotAccountRecord appHotAccountRecord = this.appAccountService.createHotRecord(Integer.valueOf(1), appAccount, accountadd.getMoney(), accountadd.getTransactionNum(), accountadd.getRemarks());
                                 /* 378 */
                                 listahar.add(appHotAccountRecord);
-                                /*     */
+
                             }
-                            /*     */
-                            /*     */
+
+
                         }
                         /* 382 */
                         else if (accountadd.getMoney().compareTo(BigDecimal.ZERO) == -1) {
@@ -641,17 +547,15 @@ import java.util.*;
                             AppColdAccountRecord AppColdAccountRecord = this.appAccountService.createColdRecord(Integer.valueOf(1), appAccount, accountadd.getMoney(), accountadd.getTransactionNum(), accountadd.getRemarks());
                             /* 387 */
                             listacar.add(AppColdAccountRecord);
-                            /*     */
+
                         }
-                        /*     */
+
                         /* 390 */
                         setaccount.add(appAccount.getId());
-                        /*     */
+
                     }
-                    /*     */
-                }
-                /*     */
-                else {
+
+                } else {
                     /* 394 */
                     ExDigitalmoneyAccount exDigitalmoneyAccount = (ExDigitalmoneyAccount) this.exDigitalmoneyAccountService.get(accountadd.getAccountId());
                     /* 395 */
@@ -670,9 +574,9 @@ import java.util.*;
                                 ExDmHotAccountRecord exDmHotAccountRecord = this.exDigitalmoneyAccountService.createHotRecord(Integer.valueOf(1), exDigitalmoneyAccount, accountadd.getMoney(), accountadd.getTransactionNum(), accountadd.getRemarks());
                                 /* 402 */
                                 listehar.add(exDmHotAccountRecord);
-                                /*     */
+
                             }
-                            /*     */
+
                         }
                         /* 405 */
                         else if (accountadd.getMoney().compareTo(BigDecimal.ZERO) == -1) {
@@ -686,50 +590,50 @@ import java.util.*;
                             ExDmColdAccountRecord exDmColdAccountRecord = this.exDigitalmoneyAccountService.createColdRecord(Integer.valueOf(1), exDigitalmoneyAccount, accountadd.getMoney(), accountadd.getTransactionNum(), accountadd.getRemarks());
                             /* 410 */
                             listedcar.add(exDmColdAccountRecord);
-                            /*     */
+
                         }
-                        /*     */
-                        /*     */
+
+
                         /* 414 */
                         setaccountcoin.add(exDigitalmoneyAccount.getId());
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
-        /*     */
+
+
         /* 421 */
         if ((null != listahar) && (listahar.size() > 0)) {
             /* 422 */
             this.appHotAccountRecordDao.insertRecord(listahar);
-            /*     */
+
         }
         /* 424 */
         if ((null != listacar) && (listacar.size() > 0)) {
             /* 425 */
             this.appColdAccountRecordDao.insertRecord(listacar);
-            /*     */
+
         }
         /* 427 */
         if ((null != listehar) && (listehar.size() > 0)) {
             /* 428 */
             this.exDmHotAccountRecordDao.insertRecord(listehar);
-            /*     */
+
         }
         /* 430 */
         if ((null != listedcar) && (listedcar.size() > 0)) {
             /* 431 */
             this.exDmColdAccountRecordDao.insertRecord(listedcar);
-            /*     */
+
         }
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
         /* 437 */
         Iterator<Long> iteratora = setaccount.iterator();
         /* 438 */
@@ -746,13 +650,13 @@ import java.util.*;
             appAccountredis.setColdMoneyDouble(Double.valueOf(appAccountredis.getColdMoney().doubleValue()));
             /* 444 */
             lista.add(appAccountredis);
-            /*     */
+
         }
         /* 446 */
         if ((null != lista) && (lista.size() > 0)) {
             /* 447 */
             this.appAccountDao.updateAppAccount(lista);
-            /*     */
+
         }
         /* 449 */
         Iterator<Long> iteratorc = setaccountcoin.iterator();
@@ -770,18 +674,18 @@ import java.util.*;
             exDigitalmoneyAccountredis.setColdMoneyDouble(Double.valueOf(exDigitalmoneyAccountredis.getColdMoney().doubleValue()));
             /* 456 */
             listd.add(exDigitalmoneyAccountredis);
-            /*     */
+
         }
         /* 458 */
         if ((null != listd) && (listd.size() > 0)) {
             /* 459 */
             this.exDigitalmoneyAccountDao.updateExDigitalmoneyAccount(listd);
-            /*     */
+
         }
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
         /* 465 */
         Iterator<String> iteratorTradeDealAccountChangedelete = keysTradeDealAccountChange.iterator();
         /* 466 */
@@ -790,7 +694,7 @@ import java.util.*;
             String keystr = (String) iteratorTradeDealAccountChangedelete.next();
             /* 468 */
             this.redisService.delete(keystr);
-            /*     */
+
         }
         /* 470 */
         long end = System.currentTimeMillis();
@@ -800,35 +704,29 @@ import java.util.*;
         if (time > 800L) {
             /* 473 */
             LogFactory.info("accountredis（账户和资金流水）入库总耗时：" + time + "ms");
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public void reidsToMysqlmq()
-    /*     */ {
+
+    public void reidsToMysqlmq() {
         /* 480 */
         MessageProducer messageProducer = (MessageProducer) ContextUtil.getBean("messageProducer");
         /* 481 */
         messageProducer.reidsToMysql("111");
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public void reidsToredisLogmq()
-    /*     */ {
+
+    public void reidsToredisLogmq() {
         /* 487 */
         MessageProducer messageProducer = (MessageProducer) ContextUtil.getBean("messageProducer");
         /* 488 */
         messageProducer.reidsToRedisLog("333");
-        /*     */
+
     }
-    /*     */
+
 }
 
 

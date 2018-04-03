@@ -1,43 +1,27 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.entrust.service.impl;
-/*    */
-/*    */
+
 
 import hry.trade.redis.model.Accountadd;
 
 import java.util.List;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class AccountAddToRedisRunable
-        /*    */ implements Runnable
-        /*    */ {
-    /*    */   private List<Accountadd> aadds;
 
-    /*    */
-    /*    */
-    public AccountAddToRedisRunable(List<Accountadd> aadds)
-    /*    */ {
+public class AccountAddToRedisRunable
+        implements Runnable {
+    private List<Accountadd> aadds;
+
+
+    public AccountAddToRedisRunable(List<Accountadd> aadds) {
         /* 23 */
         this.aadds = aadds;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
+
     public void run() {
     }
-    /*    */
+
 }
 
 

@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service.impl;
-/*    */
-/*    */
+
 
 import hry.account.fund.model.AppAccount;
 import hry.account.fund.model.AppHotAccountRecord;
@@ -13,64 +12,26 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
+
 @Service("appHotAccountRecordService")
-/*    */ public class AppHotAccountRecordServiceImpl
-        /*    */ extends BaseServiceImpl<AppHotAccountRecord, Long>
-        /*    */ implements AppHotAccountRecordService
-        /*    */ {
-    /*    */
+public class AppHotAccountRecordServiceImpl
+        extends BaseServiceImpl<AppHotAccountRecord, Long>
+        implements AppHotAccountRecordService {
+
     @Resource(name = "appHotAccountRecordDao")
-    /*    */ public void setDao(BaseDao<AppHotAccountRecord, Long> dao)
-    /*    */ {
+    public void setDao(BaseDao<AppHotAccountRecord, Long> dao) {
         /* 32 */
         this.dao = dao;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    public void addHotRecord(BigDecimal money, AppAccount appAccount, int type, int states)
-    /*    */ {
+
+    public void addHotRecord(BigDecimal money, AppAccount appAccount, int type, int states) {
         /* 51 */
         AppHotAccountRecord appHotAccountRecord = new AppHotAccountRecord();
         /* 52 */
         appHotAccountRecord.setTrueName(appAccount.getTrueName());
-        /*    */
+
         /* 54 */
         appHotAccountRecord.setAccountId(appAccount.getId());
         /* 55 */
@@ -91,12 +52,12 @@ import java.math.BigDecimal;
         appHotAccountRecord.setWebsite(appAccount.getWebsite());
         /* 63 */
         appHotAccountRecord.setTransactionNum("000000000");
-        /*    */
+
         /* 65 */
         super.save(appHotAccountRecord);
-        /*    */
+
     }
-    /*    */
+
 }
 
 

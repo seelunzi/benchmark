@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.account.service.impl;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.core.mvc.dao.base.BaseDao;
@@ -18,99 +17,39 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-@Service("exDigitalmoneyAccountService")
-/*     */ public class ExDigitalmoneyAccountServiceImpl
-        /*     */ extends BaseServiceImpl<ExDigitalmoneyAccount, Long>
-        /*     */ implements ExDigitalmoneyAccountService
-        /*     */ {
-    /*     */   private ExDigitalmoneyAccountService exDigitalmoneyAccountService;
-    /*     */
-    @Resource
-    /*     */ private ExDmColdAccountRecordService exDmColdAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private ExDmHotAccountRecordService exDmHotAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private AppColdAccountRecordService appColdAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private AppHotAccountRecordService appHotAccountRecordService;
 
-    /*     */
-    /*     */
+@Service("exDigitalmoneyAccountService")
+public class ExDigitalmoneyAccountServiceImpl
+        extends BaseServiceImpl<ExDigitalmoneyAccount, Long>
+        implements ExDigitalmoneyAccountService {
+    private ExDigitalmoneyAccountService exDigitalmoneyAccountService;
+
+    @Resource
+    private ExDmColdAccountRecordService exDmColdAccountRecordService;
+
+    @Resource
+    private ExDmHotAccountRecordService exDmHotAccountRecordService;
+
+    @Resource
+    private AppColdAccountRecordService appColdAccountRecordService;
+
+    @Resource
+    private AppHotAccountRecordService appHotAccountRecordService;
+
+
+
     @Resource(name = "exDigitalmoneyAccountDao")
-    /*     */ public void setDao(BaseDao<ExDigitalmoneyAccount, Long> dao)
-    /*     */ {
+    public void setDao(BaseDao<ExDigitalmoneyAccount, Long> dao) {
         /*  65 */
         this.dao = dao;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public ExDmColdAccountRecord createColdRecord(Integer recordType, ExDigitalmoneyAccount exDigitalmoneyAccount, BigDecimal freezeMoney, String transactionNum, Integer remark)
-    /*     */ {
+
+    public ExDmColdAccountRecord createColdRecord(Integer recordType, ExDigitalmoneyAccount exDigitalmoneyAccount, BigDecimal freezeMoney, String transactionNum, Integer remark) {
         /*  83 */
         Integer status = Integer.valueOf(5);
-        /*     */
+
         /*  85 */
         ExDmColdAccountRecord coldAccountRecord = new ExDmColdAccountRecord();
         /*  86 */
@@ -141,14 +80,11 @@ import java.math.BigDecimal;
         coldAccountRecord.setRemark(AccountRemarkEnum.getName(remark.intValue()));
         /*  99 */
         return coldAccountRecord;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public ExDmHotAccountRecord createHotRecord(Integer recordType, ExDigitalmoneyAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark)
-    /*     */ {
+
+    public ExDmHotAccountRecord createHotRecord(Integer recordType, ExDigitalmoneyAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark) {
         /* 105 */
         Integer status = Integer.valueOf(5);
         /* 106 */
@@ -161,7 +97,7 @@ import java.math.BigDecimal;
         hotAccountRecord.setWebsite(account.getWebsite());
         /* 110 */
         hotAccountRecord.setCoinCode(account.getCoinCode());
-        /*     */
+
         /* 112 */
         hotAccountRecord.setCustomerId(account.getCustomerId());
         /* 113 */
@@ -182,49 +118,37 @@ import java.math.BigDecimal;
         hotAccountRecord.setRemark(AccountRemarkEnum.getName(remark.intValue()));
         /* 121 */
         return hotAccountRecord;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public ExDigitalmoneyAccountRedis getExDigitalmoneyAccountByRedis(String id)
-    /*     */ {
+
+    public ExDigitalmoneyAccountRedis getExDigitalmoneyAccountByRedis(String id) {
         /* 129 */
         Object obj = TradeRedis.redisUtilExDigitalmoneyAccount.get(id);
         /* 130 */
-        if (null == obj)
-            /*     */ {
+        if (null == obj) {
             /* 132 */
             ExDigitalmoneyAccount account = (ExDigitalmoneyAccount) get(Long.valueOf(id));
             /* 133 */
             ExDigitalmoneyAccountRedis accountr = (ExDigitalmoneyAccountRedis) JSON.parseObject(JSON.toJSONString(account), ExDigitalmoneyAccountRedis.class);
             /* 134 */
             return accountr;
-            /*     */
+
         }
         /* 136 */
         ExDigitalmoneyAccountRedis accountr = (ExDigitalmoneyAccountRedis) obj;
         /* 137 */
         return accountr;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setExDigitalmoneyAccounttoRedis(ExDigitalmoneyAccountRedis exDigitalmoneyAccount)
-    /*     */ {
+
+    public void setExDigitalmoneyAccounttoRedis(ExDigitalmoneyAccountRedis exDigitalmoneyAccount) {
         /* 146 */
         TradeRedis.redisUtilExDigitalmoneyAccount.put(exDigitalmoneyAccount, exDigitalmoneyAccount.getId().toString());
-        /*     */
+
     }
-    /*     */
+
 }
 
 

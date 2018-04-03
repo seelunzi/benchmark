@@ -1,21 +1,16 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.comparator;
-/*    */
-/*    */
+
 
 import hry.trade.redis.model.EntrustTrade;
 
 import java.util.Comparator;
 
-/*    */
-/*    */
-/*    */
-/*    */ public class AscEntrustComparator
-        /*    */ implements Comparator<EntrustTrade>
-        /*    */ {
-    /*    */
-    public int compare(EntrustTrade o1, EntrustTrade o2)
-    /*    */ {
+
+public class AscEntrustComparator
+        implements Comparator<EntrustTrade> {
+
+    public int compare(EntrustTrade o1, EntrustTrade o2) {
         /* 12 */
         if (o1.getEntrustPrice().compareTo(o2.getEntrustPrice()) == 1)
             /* 13 */ return 1;
@@ -23,13 +18,13 @@ import java.util.Comparator;
         if (o1.getEntrustPrice().compareTo(o2.getEntrustPrice()) == -1) {
             /* 15 */
             return -1;
-            /*    */
+
         }
         /* 17 */
         return 0;
-        /*    */
+
     }
-    /*    */
+
 }
 
 

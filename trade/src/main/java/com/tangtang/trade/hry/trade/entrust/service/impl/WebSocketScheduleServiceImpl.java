@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.entrust.service.impl;
-/*    */
-/*    */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.core.thread.ThreadPool;
@@ -18,64 +17,19 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-@Service("webSocketScheduleService")
-/*    */ public class WebSocketScheduleServiceImpl
-        /*    */ implements WebSocketScheduleService
-        /*    */ {
-    /*    */
-    @Resource
-    /*    */ private ExOrderService exOrderService;
-    /*    */
-    @Resource
-    /*    */ private ExEntrustService entrustService;
 
-    /*    */
-    /*    */
-    public void pushMarket()
-    /*    */ {
+@Service("webSocketScheduleService")
+public class WebSocketScheduleServiceImpl
+        implements WebSocketScheduleService {
+
+    @Resource
+    private ExOrderService exOrderService;
+
+    @Resource
+    private ExEntrustService entrustService;
+
+
+    public void pushMarket() {
         /* 57 */
         Integer i = Integer.valueOf(0);
         /* 58 */
@@ -87,9 +41,8 @@ import java.util.List;
             /* 61 */
             List<String> productList = JSON.parseArray(productListStr, String.class);
             /* 62 */
-            for (String coinCodetwo : productList)
-                /*    */ {
-                /*    */
+            for (String coinCodetwo : productList) {
+
                 /* 65 */
                 RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
                 /* 66 */
@@ -105,7 +58,7 @@ import java.util.List;
                 String flagstrkey = TradeRedis.getEntrustTimeFlag(coinCode, fixPriceCoinCode);
                 /* 71 */
                 String flag = redisTradeService.get(flagstrkey);
-                /*    */
+
                 /* 73 */
                 if ((null != flag) && (flag.equals("1"))) {
                     /* 74 */
@@ -117,35 +70,34 @@ import java.util.List;
                     ExEntrutKlineRunable exEntrutKlineRunable = new ExEntrutKlineRunable(coinCode, fixPriceCoinCode, header);
                     /* 77 */
                     ThreadPool.exe(exEntrutKlineRunable);
-                    /*    */
+
                     /* 79 */
                     redisTradeService.save(TradeRedis.getEntrustTimeFlag(coinCode, fixPriceCoinCode), "0");
-                    /*    */
+
                 }
-                /*    */
+
             }
-            /*    */
+
         }
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
-        /*    */
+
+
+
+
+
+
+
+
+
+
         /* 93 */
         long end = System.currentTimeMillis();
-        /*    */
+
     }
 
-    /*    */
-    /*    */
+
     public void pushEntrusDephMarket() {
     }
-    /*    */
+
 }
 
 

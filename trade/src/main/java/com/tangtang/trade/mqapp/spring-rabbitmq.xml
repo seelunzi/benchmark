@@ -20,7 +20,7 @@
     <!--定义queue -->
     <rabbit:queue name="queueTest" durable="true" auto-delete="false" exclusive="false" declared-by="connectAdmin"/>
     <!-- 消息接收者 -->
-    <bean id="messageReceiver" class="hry.trade.mq.MessageConsumer"></bean>
+    <bean id="messageReceiver" class="com.tangtang.trade.hry.trade.mq.MessageConsumer"></bean>
     <!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
     <rabbit:listener-container connection-factory="connectionFactory" requeue-rejected="false">
         <rabbit:listener queues="queueTest" ref="messageReceiver"/>

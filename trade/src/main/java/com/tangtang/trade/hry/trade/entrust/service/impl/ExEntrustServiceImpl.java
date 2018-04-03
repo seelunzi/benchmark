@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.entrust.service.impl;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.core.mvc.dao.base.BaseDao;
@@ -37,108 +36,45 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-@Service("exEntrustService")
-/*     */ public class ExEntrustServiceImpl
-        /*     */ extends BaseServiceImpl<ExEntrust, Long>
-        /*     */ implements ExEntrustService
-        /*     */ {
-    /*     */
-    @Resource
-    /*     */ private ExOrderInfoService exOrderInfoService;
-    /*     */
-    @Resource
-    /*     */ private ExOrderService exOrderService;
-    /*     */
-    @Resource
-    /*     */ public RedisService redisService;
-    /*     */
-    @Resource
-    /*     */ public CommonDao commonDao;
-    /*     */
-    @Resource
-    /*     */ public ExEntrustDao exEntrustDao;
 
-    /*     */
-    /*     */
+@Service("exEntrustService")
+public class ExEntrustServiceImpl
+        extends BaseServiceImpl<ExEntrust, Long>
+        implements ExEntrustService {
+
+    @Resource
+    private ExOrderInfoService exOrderInfoService;
+
+    @Resource
+    private ExOrderService exOrderService;
+
+    @Resource
+    public RedisService redisService;
+
+    @Resource
+    public CommonDao commonDao;
+
+    @Resource
+    public ExEntrustDao exEntrustDao;
+
+
+
     @Resource(name = "exEntrustDao")
-    /*     */ public void setDao(BaseDao<ExEntrust, Long> dao)
-    /*     */ {
+    public void setDao(BaseDao<ExEntrust, Long> dao) {
         /*  71 */
         this.dao = dao;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void initTradeRedis()
-    /*     */ {
+
+    public void initTradeRedis() {
         /*  87 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /*  88 */
         ExEntrustService exEntrustService = (ExEntrustService) ContextUtil.getBean("exEntrustService");
-        /*     */
-        /*     */
-        /*     */
+
+
+
         /*  92 */
         List<ExCointoCoin> listExCointoCoin = this.commonDao.getExointocoinValid();
         /*  93 */
@@ -149,33 +85,29 @@ import java.util.*;
             this.exOrderService.setLastExchangPrice(header);
             /*  96 */
             this.exOrderService.setCurrentExchangPrice(header);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void tradeInit()
-    /*     */ {
+
+    public void tradeInit() {
         /* 104 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
-        /*     */
+
         /* 106 */
         redisTradeService.delkeys(":buy:");
         /* 107 */
         redisTradeService.delkeys(":sell:");
-        /*     */
-        /*     */
+
+
         /* 110 */
         List<ExCointoCoin> listExCointoCoin = this.commonDao.getExointocoinValid();
         /* 111 */
         for (ExCointoCoin exCointoCoin : listExCointoCoin) {
             /* 112 */
             String header = getHeader(exCointoCoin.getCoinCode(), exCointoCoin.getFixPriceCoinCode());
-            /*     */
+
             /* 114 */
             QueryFilter filterbuy = new QueryFilter(ExEntrust.class);
             /* 115 */
@@ -210,7 +142,7 @@ import java.util.*;
                     if (l.getEntrustPrice().compareTo(sameprice) == 0) {
                         /* 130 */
                         listbuypricesame.add(entrustTrade);
-                        /*     */
+
                     } else {
                         /* 132 */
                         String key = getHeader(entrustTrade) + ":buy:" + sameprice.setScale(10, 6).toString();
@@ -222,27 +154,27 @@ import java.util.*;
                         listbuypricesame.add(entrustTrade);
                         /* 136 */
                         sameprice = l.getEntrustPrice();
-                        /*     */
+
                     }
-                    /*     */
+
                 }
                 /* 139 */
                 String key = header + ":buy:" + sameprice.setScale(10, 6).toString();
                 /* 140 */
                 redisTradeService.save(key, JSON.toJSONString(listbuypricesame));
-                /*     */
-                /*     */
+
+
                 /* 143 */
                 this.redisService.save(buyonePricekey, JSON.toJSONString(((ExEntrust) listbuy.get(0)).getEntrustPrice()));
-                /*     */
+
             } else {
                 /* 145 */
                 this.redisService.delete(buyonePricekey);
-                /*     */
+
             }
-            /*     */
-            /*     */
-            /*     */
+
+
+
             /* 150 */
             QueryFilter filtersell = new QueryFilter(ExEntrust.class);
             /* 151 */
@@ -277,7 +209,7 @@ import java.util.*;
                     if (l.getEntrustPrice().compareTo(sameprice) == 0) {
                         /* 166 */
                         listsellpricesame.add(entrustTrade);
-                        /*     */
+
                     } else {
                         /* 168 */
                         String key = getHeader(entrustTrade) + ":sell:" + sameprice.setScale(10, 6).toString();
@@ -289,37 +221,32 @@ import java.util.*;
                         listsellpricesame.add(entrustTrade);
                         /* 172 */
                         sameprice = l.getEntrustPrice();
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
-                /*     */
+
+
                 /* 177 */
                 String key = header + ":sell:" + sameprice.setScale(10, 6).toString();
                 /* 178 */
                 redisTradeService.save(key, JSON.toJSONString(listsellpricesame));
-                /*     */
+
                 /* 180 */
                 this.redisService.save(sellonePricekey, JSON.toJSONString(((ExEntrust) listsell.get(0)).getEntrustPrice()));
-                /*     */
+
             } else {
                 /* 182 */
                 this.redisService.delete(sellonePricekey);
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void cancelAutoAddExEntrust()
-    /*     */ {
+
+    public void cancelAutoAddExEntrust() {
         /* 192 */
         Map<String, String> mapLoadWeb = PropertiesUtils.getLoadWeb();
         /* 193 */
@@ -336,8 +263,8 @@ import java.util.*;
                 Integer isSratAuto = exCointoCoin.getIsSratAuto();
                 /* 199 */
                 Integer isFromChbtc = exCointoCoin.getIsFromChbtc();
-                /*     */
-                /*     */
+
+
                 /* 202 */
                 if (isSratAuto.equals(Integer.valueOf(1))) {
                     /* 203 */
@@ -346,7 +273,7 @@ import java.util.*;
                     if (null == customerId) {
                         /* 205 */
                         autoUsernameArr = autoUsernames.split(",");
-                        /*     */
+
                     }
                     /* 207 */
                     if (null == autoUsernameArr) break;
@@ -362,18 +289,17 @@ import java.util.*;
                                 System.out.println("填写的手机号有误，请检查重试！");
                                 /* 213 */
                                 break;
-                                /*     */
+
                             }
                             /* 215 */
                             customerId = customer.getId();
                             /* 216 */
                             exCointoCoin.setCustomerId(customerId);
-                            /*     */
+
                         }
-                        /*     */
+
                         /* 219 */
-                        if (isFromChbtc.equals(Integer.valueOf(0)))
-                            /*     */ {
+                        if (isFromChbtc.equals(Integer.valueOf(0))) {
                             /* 221 */
                             EntrustTrade entrustTrade = new EntrustTrade();
                             /* 222 */
@@ -384,42 +310,32 @@ import java.util.*;
                             entrustTrade.setFixPriceCoinCode(exCointoCoin.getFixPriceCoinCode());
                             /* 225 */
                             entrustTrade.setCancelKeepN(Integer.valueOf(10));
-                            /*     */
+
                             /* 227 */
                             String str = JSON.toJSONString(entrustTrade);
                             /* 228 */
                             MessageProducer messageProducer = (MessageProducer) ContextUtil.getBean("messageProducer");
-                            /*     */
+
                             /* 230 */
                             messageProducer.toTrade(str);
-                            /*     */
+
                         }
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
+
     /* 244 */   public static int entrustType = 1;
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void autoAddExEntrust()
-    /*     */ {
+
+    public void autoAddExEntrust() {
         /* 250 */
         Map<String, String> mapLoadWeb = PropertiesUtils.getLoadWeb();
         /* 251 */
@@ -437,19 +353,18 @@ import java.util.*;
                 /* 257 */
                 if (maxjs > max) {
                     /* 258 */
-                    if (entrustType == 1)
-                        /*     */ {
+                    if (entrustType == 1) {
                         /* 260 */
                         entrustType = 2;
-                        /*     */
+
                     } else {
                         /* 262 */
                         entrustType = 1;
-                        /*     */
+
                     }
                     /* 264 */
                     return;
-                    /*     */
+
                 }
                 /* 266 */
                 String autoUsernames = exCointoCoin.getAutoUsername();
@@ -477,13 +392,12 @@ import java.util.*;
                     if (null == customerId) {
                         /* 278 */
                         autoUsernameArr = autoUsernames.split(",");
-                        /*     */
+
                     }
                     /* 280 */
                     if (null == autoUsernameArr) break;
                     /* 281 */
-                    for (String autoUsername : autoUsernameArr)
-                        /*     */ {
+                    for (String autoUsername : autoUsernameArr) {
                         /* 283 */
                         AppCustomer customer = this.commonDao.getAppUserByuserName(autoUsername);
                         /* 284 */
@@ -492,134 +406,93 @@ import java.util.*;
                             System.out.println("填写的手机号有误，请检查重试！");
                             /* 286 */
                             break;
-                            /*     */
+
                         }
                         /* 288 */
                         customerId = customer.getId();
                         /* 289 */
                         exCointoCoin.setCustomerId(customerId);
-                        /*     */
+
                         /* 291 */
                         maxjs++;
                         /* 292 */
-                        if (isFromChbtc.equals(Integer.valueOf(0)))
-                            /*     */ {
-                            /*     */
-                            /*     */
-                            /*     */
+                        if (isFromChbtc.equals(Integer.valueOf(0))) {
+
+
+
                             /* 297 */
                             for (int i = 0; i < 1; i++) {
                                 /* 298 */
-                                if (entrustType == 1)
-                                    /*     */ {
+                                if (entrustType == 1) {
                                     /* 300 */
                                     BigDecimal buyautoPrice = getPrcie(exCointoCoin.getAtuoPriceType(), exCointoCoin.getUpFloatPer(), exCointoCoin.getCoinCode(), exCointoCoin.getFixPriceCoinCode(), autoPrice, autoPriceFloat);
-                                    /*     */
+
                                     /* 302 */
                                     buyautoPrice = buyautoPrice.setScale(8, 5);
-                                    /*     */
+
                                     /* 304 */
                                     BigDecimal buytrueNum = getPrcie(exCointoCoin.getAtuoPriceType(), exCointoCoin.getUpFloatPer(), exCointoCoin.getCoinCode(), exCointoCoin.getFixPriceCoinCode(), autoCount, autoCountFloat);
-                                    /*     */
+
                                     /* 306 */
                                     buytrueNum = buytrueNum.setScale(8, 5);
                                     /* 307 */
                                     String coinCodebuy = exCointoCoin.getCoinCode() + "_" + exCointoCoin.getFixPriceCoinCode();
                                     /* 308 */
                                     addExEntrust(fixPriceType, Integer.valueOf(1), customerId, buyautoPrice, autoUsername, coinCodebuy, buytrueNum, "cny", "cn");
-                                    /*     */
-                                }
-                                /*     */
-                                else {
+
+                                } else {
                                     /* 311 */
                                     BigDecimal sellautoPrice = getPrcie(exCointoCoin.getAtuoPriceType(), exCointoCoin.getUpFloatPer(), exCointoCoin.getCoinCode(), exCointoCoin.getFixPriceCoinCode(), autoPrice, autoPriceFloat);
-                                    /*     */
+
                                     /* 313 */
                                     sellautoPrice = sellautoPrice.setScale(8, 5);
-                                    /*     */
+
                                     /* 315 */
                                     BigDecimal selltrueNum = getPrcie(exCointoCoin.getAtuoPriceType(), exCointoCoin.getUpFloatPer(), exCointoCoin.getCoinCode(), exCointoCoin.getFixPriceCoinCode(), autoCount, autoCountFloat);
-                                    /*     */
+
                                     /* 317 */
                                     selltrueNum = selltrueNum.setScale(8, 5);
                                     /* 318 */
                                     String coinCodesell = exCointoCoin.getCoinCode() + "_" + exCointoCoin.getFixPriceCoinCode();
                                     /* 319 */
                                     addExEntrust(fixPriceType, Integer.valueOf(2), customerId, sellautoPrice, autoUsername, coinCodesell, selltrueNum, "cny", "cn");
-                                    /*     */
+
                                 }
-                                /*     */
+
                             }
-                            /*     */
+
                         }
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
         int max;
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
         int maxjs;
-        /*     */
-        /*     */
+
+
         /* 337 */
-        if (entrustType == 1)
-            /*     */ {
+        if (entrustType == 1) {
             /* 339 */
             entrustType = 2;
-            /*     */
+
         } else {
             /* 341 */
             entrustType = 1;
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String addExEntrust(Integer fixPriceType, Integer type, Long customerId, BigDecimal price, String autoUsername, String coinCode, BigDecimal entrustCount, String currencyType, String website)
-    /*     */ {
+
+    public String addExEntrust(Integer fixPriceType, Integer type, Long customerId, BigDecimal price, String autoUsername, String coinCode, BigDecimal entrustCount, String currencyType, String website) {
         /* 377 */
         long start1 = System.currentTimeMillis();
         /* 378 */
@@ -630,13 +503,13 @@ import java.util.*;
         if (rtd.length == 1) {
             /* 381 */
             return "";
-            /*     */
+
         }
         /* 383 */
         exEntrust.setFixPriceCoinCode(rtd[1]);
         /* 384 */
         exEntrust.setCoinCode(rtd[0]);
-        /*     */
+
         /* 386 */
         exEntrust.setFixPriceType(fixPriceType);
         /* 387 */
@@ -649,7 +522,7 @@ import java.util.*;
         if ((price.compareTo(new BigDecimal(0)) == 0) || (entrustCount.compareTo(new BigDecimal(0)) == 0)) {
             /* 391 */
             return "";
-            /*     */
+
         }
         /* 393 */
         exEntrust.setEntrustSum(new BigDecimal("0"));
@@ -657,11 +530,11 @@ import java.util.*;
         exEntrust.setEntrustWay(Integer.valueOf(1));
         /* 395 */
         exEntrust.setCustomerId(customerId);
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
+
         /* 401 */
         exEntrust.setSource(Integer.valueOf(2));
         /* 402 */
@@ -676,11 +549,10 @@ import java.util.*;
         MQEnter.pushExEntrustMQ(exEntrust);
         /* 407 */
         return "";
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public void initExEntrust(EntrustTrade exEntrust) {
         /* 411 */
         String saasId = PropertiesUtils.APP.getProperty("app.saasId");
@@ -688,47 +560,47 @@ import java.util.*;
         if (null == exEntrust.getEntrustTime()) {
             /* 413 */
             exEntrust.setEntrustTime(new Date());
-            /*     */
+
         }
-        /*     */
+
         /* 416 */
         exEntrust.setEntrustNum(IdGenerate.transactionNum("10"));
-        /*     */
-        /*     */
+
+
         /* 419 */
         if (exEntrust.getType().intValue() == 1) {
             /* 420 */
             exEntrust.setEntrustNum("WB" + UUID.randomUUID());
-            /*     */
+
         } else {
             /* 422 */
             exEntrust.setEntrustNum("WS" + UUID.randomUUID());
-            /*     */
+
         }
         /* 424 */
         exEntrust.setCustomerId(exEntrust.getCustomerId());
-        /*     */
+
         /* 426 */
         RedisUtil<UserRedis> redisUtil = new RedisUtil(UserRedis.class);
         /* 427 */
         UserRedis userRedis = (UserRedis) redisUtil.get(exEntrust.getCustomerId().toString());
-        /*     */
+
         /* 429 */
         if (exEntrust.getFixPriceType().equals(Integer.valueOf(0))) {
             /* 430 */
             exEntrust.setAccountId(userRedis.getAccountId());
-            /*     */
+
         } else {
             /* 432 */
             exEntrust.setAccountId(userRedis.getDmAccountId(exEntrust.getFixPriceCoinCode()));
-            /*     */
+
         }
         /* 434 */
         exEntrust.setCoinAccountId(userRedis.getDmAccountId(exEntrust.getCoinCode()));
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
         /* 439 */
         exEntrust.setStatus(Integer.valueOf(0));
         /* 440 */
@@ -743,25 +615,24 @@ import java.util.*;
         if (null == exEntrust.getEntrustCount()) {
             /* 445 */
             exEntrust.setEntrustCount(new BigDecimal("0"));
-            /*     */
+
         }
         /* 447 */
         if (null == exEntrust.getEntrustPrice()) {
             /* 448 */
             exEntrust.setEntrustPrice(new BigDecimal("0"));
-            /*     */
+
         }
         /* 450 */
         exEntrust.setTransactionFeeRate(new BigDecimal("0"));
         /* 451 */
         exEntrust.setTransactionFee(new BigDecimal("0"));
-        /*     */
+
         /* 453 */
-        if (null == exEntrust.getEntrustWay())
-            /*     */ {
+        if (null == exEntrust.getEntrustWay()) {
             /* 455 */
             exEntrust.setEntrustWay(Integer.valueOf(1));
-            /*     */
+
         }
         /* 457 */
         if (null == exEntrust.getFloatDownPrice()) {
@@ -771,54 +642,34 @@ import java.util.*;
             if ((exEntrust.getEntrustWay().intValue() == 1) && (exEntrust.getType().intValue() == 1)) {
                 /* 460 */
                 exEntrust.setFloatDownPrice(exEntrust.getEntrustPrice());
-                /*     */
+
             }
             /* 462 */
             if ((exEntrust.getEntrustWay().intValue() == 1) && (exEntrust.getType().intValue() == 2)) {
                 /* 463 */
                 exEntrust.setFloatUpPrice(new BigDecimal("999999"));
-                /*     */
+
             }
-            /*     */
+
         }
         /* 466 */
-        if (null == exEntrust.getFloatUpPrice())
-            /*     */ {
+        if (null == exEntrust.getFloatUpPrice()) {
             /* 468 */
             exEntrust.setFloatUpPrice(new BigDecimal("0"));
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public BigDecimal getPrcie(Integer atuoPriceType, BigDecimal upFloatPer, String coinCode, String fixPriceCoinCode, BigDecimal number, BigDecimal floatNum)
-    /*     */ {
+
+    public BigDecimal getPrcie(Integer atuoPriceType, BigDecimal upFloatPer, String coinCode, String fixPriceCoinCode, BigDecimal number, BigDecimal floatNum) {
         /* 491 */
         if (atuoPriceType.intValue() == 1) {
             /* 492 */
             return getFloatNum1(number, floatNum)[1];
-            /*     */
+
         }
-        /*     */
+
         /* 495 */
         String currentPrice = TradeRedis.getStringData(coinCode + "_" + fixPriceCoinCode + ":" + "currentExchangPrice");
         /* 496 */
@@ -829,35 +680,31 @@ import java.util.*;
             if (price[0].compareTo(new BigDecimal(1)) == 0) {
                 /* 499 */
                 return price[1].multiply(upFloatPer);
-                /*     */
+
             }
             /* 501 */
             return price[1];
-            /*     */
+
         }
-        /*     */
-        /*     */
+
+
         /* 505 */
         return null;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public BigDecimal[] getFloatNum1(BigDecimal number, BigDecimal floatNum)
-    /*     */ {
+
+    public BigDecimal[] getFloatNum1(BigDecimal number, BigDecimal floatNum) {
         /* 512 */
         BigDecimal[] price = new BigDecimal[2];
         /* 513 */
         BigDecimal truePrice = number;
-        /*     */
+
         /* 515 */
         double num = Math.random();
         /* 516 */
         BigDecimal fudongNum = number.multiply(floatNum).divide(new BigDecimal("100")).multiply(new BigDecimal(num));
-        /*     */
+
         /* 518 */
         int number1 = (int) (Math.random() * 2.0D);
         /* 519 */
@@ -866,58 +713,50 @@ import java.util.*;
             truePrice = number.subtract(fudongNum);
             /* 521 */
             price[0] = new BigDecimal(-1);
-            /*     */
+
         } else {
             /* 523 */
             truePrice = number.add(fudongNum);
             /* 524 */
             price[0] = new BigDecimal(1);
-            /*     */
+
         }
         /* 526 */
         price[1] = truePrice;
         /* 527 */
         return price;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public String getHeader(String coinCode, String fixPriceCoinCode)
-    /*     */ {
+
+    public String getHeader(String coinCode, String fixPriceCoinCode) {
         /* 532 */
         String header = coinCode + "_" + fixPriceCoinCode;
         /* 533 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public String getHeader(EntrustTrade exEntrust)
-    /*     */ {
+
+    public String getHeader(EntrustTrade exEntrust) {
         /* 538 */
         String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode();
         /* 539 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public String getHeader(ExOrderInfo exEntrust)
-    /*     */ {
+
+    public String getHeader(ExOrderInfo exEntrust) {
         /* 544 */
         String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode();
         /* 545 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public ExEntrust getExEntrustByentrustNum(String entrustNum)
-    /*     */ {
+
+    public ExEntrust getExEntrustByentrustNum(String entrustNum) {
         /* 550 */
         QueryFilter filter = new QueryFilter(ExEntrust.class);
         /* 551 */
@@ -926,14 +765,11 @@ import java.util.*;
         filter.setSaasId("hurong_system");
         /* 553 */
         return (ExEntrust) get(filter);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public String getExEntrustChangeMarket(String coinCode, String fixPriceCoinCode, Integer n)
-    /*     */ {
+
+    public String getExEntrustChangeMarket(String coinCode, String fixPriceCoinCode, Integer n) {
         /* 559 */
         MarketDepths marketDepths = new MarketDepths();
         /* 560 */
@@ -942,7 +778,7 @@ import java.util.*;
         int keepDecimalForCoin = 4;
         /* 562 */
         int keepDecimalForCurrency = 4;
-        /*     */
+
         /* 564 */
         CoinKeepDecimal coinKeepDecimal = null;
         /* 565 */
@@ -959,13 +795,13 @@ import java.util.*;
                     if ((coinCode.equals(coin.getCoinCode())) && (fixPriceCoinCode.equals(coin.getFixPriceCoinCode()))) {
                         /* 571 */
                         coinKeepDecimal = coin;
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
         /* 576 */
         if (null != coinKeepDecimal) {
@@ -973,9 +809,9 @@ import java.util.*;
             keepDecimalForCoin = coinKeepDecimal.getKeepDecimalForCoin().intValue();
             /* 578 */
             keepDecimalForCurrency = coinKeepDecimal.getKeepDecimalForCurrency().intValue();
-            /*     */
+
         }
-        /*     */
+
         /* 581 */
         List<BigDecimal[]> bids = new ArrayList();
         /* 582 */
@@ -1010,7 +846,7 @@ import java.util.*;
                     entrustPrice = entrustTrade.getEntrustPrice();
                     /* 597 */
                     surplusEntrustCount = surplusEntrustCount.add(entrustTrade.getSurplusEntrustCount());
-                    /*     */
+
                 }
                 /* 599 */
                 BigDecimal[] array = new BigDecimal[2];
@@ -1020,17 +856,17 @@ import java.util.*;
                 array[1] = surplusEntrustCount.setScale(keepDecimalForCoin, 6);
                 /* 602 */
                 bids.add(array);
-                /*     */
+
             }
-            /*     */
+
             /* 605 */
             if (i == n.intValue())
-                /*     */ break;
+                break;
             /* 607 */
             i++;
-            /*     */
+
         }
-        /*     */
+
         /* 610 */
         map.put("bids", bids);
         /* 611 */
@@ -1043,11 +879,11 @@ import java.util.*;
             if (StringUtil.isEmpty(v)) {
                 /* 615 */
                 this.redisService.save(keybuy, JSON.toJSONString(((BigDecimal[]) bids.get(0))[0]));
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 619 */
         List<BigDecimal[]> asks = new ArrayList();
         /* 620 */
@@ -1082,7 +918,7 @@ import java.util.*;
                     entrustPrice = entrustTrade.getEntrustPrice();
                     /* 635 */
                     surplusEntrustCount = surplusEntrustCount.add(entrustTrade.getSurplusEntrustCount());
-                    /*     */
+
                 }
                 /* 637 */
                 BigDecimal[] array = new BigDecimal[2];
@@ -1092,14 +928,14 @@ import java.util.*;
                 array[1] = surplusEntrustCount.setScale(keepDecimalForCoin, 6);
                 /* 640 */
                 asks.add(array);
-                /*     */
+
             }
             /* 642 */
             if (k == n.intValue())
-                /*     */ break;
+                break;
             /* 644 */
             k++;
-            /*     */
+
         }
         /* 646 */
         map.put("asks", asks);
@@ -1113,20 +949,19 @@ import java.util.*;
             if (StringUtil.isEmpty(v)) {
                 /* 651 */
                 this.redisService.save(keysell, JSON.toJSONString(((BigDecimal[]) asks.get(0))[0]));
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 655 */
         marketDepths.setDepths(map);
         /* 656 */
         return JSON.toJSONString(marketDepths).toString();
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public BigDecimal getByn(int n) {
         /* 660 */
         BigDecimal bd = new BigDecimal(1);
@@ -1134,17 +969,15 @@ import java.util.*;
         for (int i = 0; i < n; i++) {
             /* 662 */
             bd = bd.multiply(new BigDecimal(10));
-            /*     */
+
         }
         /* 664 */
         return bd;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public String getExEntrustChangeDephMarket(String coinCode, String fixPriceCoinCode, Integer n, BigDecimal jj)
-    /*     */ {
+
+    public String getExEntrustChangeDephMarket(String coinCode, String fixPriceCoinCode, Integer n, BigDecimal jj) {
         /* 669 */
         MarketDepths marketDepths = new MarketDepths();
         /* 670 */
@@ -1153,7 +986,7 @@ import java.util.*;
         int keepDecimalForCoin = 4;
         /* 672 */
         int keepDecimalForCurrency = 4;
-        /*     */
+
         /* 674 */
         CoinKeepDecimal coinKeepDecimal = null;
         /* 675 */
@@ -1170,22 +1003,22 @@ import java.util.*;
                     if ((coinCode.equals(coin.getCoinCode())) && (fixPriceCoinCode.equals(coin.getFixPriceCoinCode()))) {
                         /* 681 */
                         coinKeepDecimal = coin;
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 687 */
         if (null != coinKeepDecimal) {
             /* 688 */
             keepDecimalForCoin = coinKeepDecimal.getKeepDecimalForCoin().intValue();
             /* 689 */
             keepDecimalForCurrency = coinKeepDecimal.getKeepDecimalForCurrency().intValue();
-            /*     */
+
         }
         /* 691 */
         int keepDecimalForCurrencysubone = keepDecimalForCurrency - 1;
@@ -1193,7 +1026,7 @@ import java.util.*;
         if (keepDecimalForCurrencysubone < 0) {
             /* 693 */
             keepDecimalForCurrencysubone = 0;
-            /*     */
+
         }
         /* 695 */
         BigDecimal depth = new BigDecimal(1).divide(getByn(keepDecimalForCurrencysubone), keepDecimalForCurrencysubone, 1);
@@ -1231,13 +1064,13 @@ import java.util.*;
                     if (j > 0) {
                         /* 712 */
                         startPrice = startPrice.subtract(depth);
-                        /*     */
+
                     }
                     /* 714 */
                     if (flag == 1) {
-                        /*     */
+
                         break;
-                        /*     */
+
                     }
                     /* 717 */
                     if (startPrice.compareTo(new BigDecimal(0)) <= 0) {
@@ -1245,7 +1078,7 @@ import java.util.*;
                         flag = 1;
                         /* 719 */
                         startPrice = new BigDecimal(0);
-                        /*     */
+
                     }
                     /* 721 */
                     BigDecimal surplusEntrustCount = new BigDecimal("0");
@@ -1265,19 +1098,19 @@ import java.util.*;
                             for (EntrustTrade entrustTrade : list) {
                                 /* 729 */
                                 surplusEntrustCount = surplusEntrustCount.add(entrustTrade.getSurplusEntrustCount());
-                                /*     */
+
                             }
-                            /*     */
+
                         }
                         /* 732 */
                         i++;
-                        /*     */
+
                     }
-                    /*     */
-                    /*     */
-                    /*     */
-                    /*     */
-                    /*     */
+
+
+
+
+
                     /* 739 */
                     BigDecimal[] array = new BigDecimal[2];
                     /* 740 */
@@ -1286,16 +1119,16 @@ import java.util.*;
                     array[1] = surplusEntrustCount.setScale(keepDecimalForCoin, 6);
                     /* 742 */
                     bids.add(array);
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
         /* 746 */
         map.put("bids", bids);
-        /*     */
-        /*     */
+
+
         /* 749 */
         List<BigDecimal[]> asks = new ArrayList();
         /* 750 */
@@ -1326,7 +1159,7 @@ import java.util.*;
                     if (j > 0) {
                         /* 763 */
                         startPrice = startPrice.add(depth);
-                        /*     */
+
                     }
                     /* 765 */
                     BigDecimal surplusEntrustCount = new BigDecimal("0");
@@ -1346,19 +1179,19 @@ import java.util.*;
                             for (EntrustTrade entrustTrade : list) {
                                 /* 773 */
                                 surplusEntrustCount = surplusEntrustCount.add(entrustTrade.getSurplusEntrustCount());
-                                /*     */
+
                             }
-                            /*     */
+
                         }
                         /* 776 */
                         k++;
-                        /*     */
+
                     }
-                    /*     */
-                    /*     */
-                    /*     */
-                    /*     */
-                    /*     */
+
+
+
+
+
                     /* 783 */
                     BigDecimal[] array = new BigDecimal[2];
                     /* 784 */
@@ -1367,22 +1200,22 @@ import java.util.*;
                     array[1] = surplusEntrustCount.setScale(keepDecimalForCoin, 6);
                     /* 786 */
                     asks.add(array);
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 791 */
         map.put("asks", asks);
         /* 792 */
         marketDepths.setDepths(map);
         /* 793 */
         return JSON.toJSONString(marketDepths).toString();
-        /*     */
+
     }
-    /*     */
+
 }
 
 

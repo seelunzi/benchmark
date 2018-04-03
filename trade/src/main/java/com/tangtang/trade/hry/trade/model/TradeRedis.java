@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.model;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.core.thread.ThreadPool;
@@ -21,39 +20,8 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.Map.Entry;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */ public class TradeRedis
-        /*     */ {
+
+public class TradeRedis {
     /*  37 */   public static RedisUtil redisUtilAppAccount = new RedisUtil(AppAccountRedis.class);
     /*  38 */   public static RedisUtil redisUtilExDigitalmoneyAccount = new RedisUtil(ExDigitalmoneyAccountRedis.class);
     /*  39 */   public static RedisUtil redisUtilExEntrust = new RedisUtil(EntrustTrade.class);
@@ -63,30 +31,25 @@ import java.util.Map.Entry;
     /*  43 */   public static String noSaveEntrustByUser = null;
     /*  44 */   public static Integer isNoSaveEntrustByUser = null;
 
-    /*     */
-    /*     */
-    /*     */
-    public static String getHeader(EntrustTrade exEntrust)
-    /*     */ {
+
+    public static String getHeader(EntrustTrade exEntrust) {
         /*  49 */
         if (exEntrust.getType().equals(Integer.valueOf(2))) {
             /*  50 */
             String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode() + ":sell";
             /*  51 */
             return header;
-            /*     */
+
         }
         /*  53 */
         String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode() + ":buy";
         /*  54 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static String getHeader(String coinCode, String fixPriceCoinCode, Integer type)
-    /*     */ {
+
+    public static String getHeader(String coinCode, String fixPriceCoinCode, Integer type) {
         /*  59 */
         if (null == type) {
             /*  60 */
@@ -100,19 +63,17 @@ import java.util.Map.Entry;
             String header = coinCode + "_" + fixPriceCoinCode + ":sell";
             /*  64 */
             return header;
-            /*     */
+
         }
         /*  66 */
         String header = coinCode + "_" + fixPriceCoinCode + ":buy";
         /*  67 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static String getHeaderMatch(String coinCode, String fixPriceCoinCode, Integer type)
-    /*     */ {
+
+    public static String getHeaderMatch(String coinCode, String fixPriceCoinCode, Integer type) {
         /*  72 */
         if (null == type) {
             /*  73 */
@@ -126,27 +87,25 @@ import java.util.Map.Entry;
             String header = coinCode + "_" + fixPriceCoinCode + ":sell";
             /*  77 */
             return header;
-            /*     */
+
         }
         /*  79 */
         String header = coinCode + "_" + fixPriceCoinCode + ":buy";
         /*  80 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getEntrustTimeFlag(String coinCode, String fixPriceCoinCode) {
         /*  84 */
         String header = coinCode + "_" + fixPriceCoinCode + ":isTimgEntrsutFlag";
         /*  85 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getHeaderMatch(EntrustTrade exEntrust) {
         /*  89 */
         if (exEntrust.getType().equals(Integer.valueOf(1))) {
@@ -154,41 +113,26 @@ import java.util.Map.Entry;
             String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode() + ":sell";
             /*  91 */
             return header;
-            /*     */
+
         }
         /*  93 */
         String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode() + ":buy";
         /*  94 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static String getHeaderFront(EntrustTrade exEntrust)
-    /*     */ {
+
+    public static String getHeaderFront(EntrustTrade exEntrust) {
         /*  99 */
         String header = exEntrust.getCoinCode() + "_" + exEntrust.getFixPriceCoinCode();
         /* 100 */
         return header;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public static void setSelfonePrice(EntrustTrade entrust)
-    /*     */ {
+
+    public static void setSelfonePrice(EntrustTrade entrust) {
         /* 116 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 117 */
@@ -203,19 +147,16 @@ import java.util.Map.Entry;
             if (StringUtil.isEmpty(buyonePrices)) {
                 /* 122 */
                 redisService.save(buyonePricekey, JSON.toJSONString(entrust.getEntrustPrice()));
-                /*     */
+
             }
             /* 124 */
             else if (new BigDecimal(buyonePrices).compareTo(entrust.getEntrustPrice()) == -1) {
                 /* 125 */
                 redisService.save(buyonePricekey, JSON.toJSONString(entrust.getEntrustPrice()));
-                /*     */
+
             }
-            /*     */
-        }
-        /*     */
-        else
-            /*     */ {
+
+        } else {
             /* 130 */
             String sellonePricekey = key + ":" + "sellonePrice";
             /* 131 */
@@ -224,21 +165,20 @@ import java.util.Map.Entry;
             if (StringUtil.isEmpty(sellonePrices)) {
                 /* 133 */
                 redisService.save(sellonePricekey, JSON.toJSONString(entrust.getEntrustPrice()));
-                /*     */
+
             }
             /* 135 */
             else if (new BigDecimal(sellonePrices).compareTo(entrust.getEntrustPrice()) == 1) {
                 /* 136 */
                 redisService.save(sellonePricekey, JSON.toJSONString(entrust.getEntrustPrice()));
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getTradeDealEntrustChangeNum() {
         /* 142 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -252,17 +192,16 @@ import java.util.Map.Entry;
             redisService.save("deal:tradeDealEntrustChangeNum", num);
             /* 147 */
             return "deal:tradeDealEntrustChange:" + num;
-            /*     */
+
         }
         /* 149 */
         redisService.save("deal:tradeDealEntrustChangeNum", "0");
         /* 150 */
         return "deal:tradeDealEntrustChange:0";
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getTradeDealAccountChangeNum() {
         /* 154 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -276,17 +215,16 @@ import java.util.Map.Entry;
             redisService.save("deal:tradeDealAccountChangeNum", num);
             /* 159 */
             return "deal:TradeDealAccountChange:" + num;
-            /*     */
+
         }
         /* 161 */
         redisService.save("deal:tradeDealAccountChangeNum", "0");
         /* 162 */
         return "deal:TradeDealAccountChange:0";
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getTradeDealOrderInfoChangeNum() {
         /* 166 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -300,30 +238,28 @@ import java.util.Map.Entry;
             redisService.save("deal:tradeDealOrderInfoChangeNum", num);
             /* 171 */
             return "deal:tradeDealOrderInfoChange:" + num;
-            /*     */
+
         }
         /* 173 */
         redisService.save("deal:tradeDealOrderInfoChangeNum", "0");
         /* 174 */
         return "deal:tradeDealOrderInfoChange:0";
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void NoMatchEnd(EntrustTrade entrust, List<Accountadd> aadds)
-    /*     */ {
+
+    public static void NoMatchEnd(EntrustTrade entrust, List<Accountadd> aadds) {
         /* 179 */
         setSelfonePrice(entrust);
         /* 180 */
         putSelfEntrustTradelist(entrust);
-        /*     */
+
         /* 182 */
         MQEnter.pushDealFundMQ(aadds);
         /* 183 */
         putEntrustByUser(entrust);
-        /*     */
-        /*     */
+
+
         /* 186 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 187 */
@@ -332,20 +268,17 @@ import java.util.Map.Entry;
         listchange.add(entrust);
         /* 189 */
         redisService.save(getTradeDealEntrustChangeNum(), JSON.toJSONString(listchange));
-        /*     */
-        /*     */
+
+
         /* 192 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
         /* 193 */
         redisTradeService.save(getEntrustTimeFlag(entrust.getCoinCode(), entrust.getFixPriceCoinCode()), "1");
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void matchOneEnd(List<Accountadd> exEntrustAccountadd, EntrustTrade exEntrust, Map<String, List<EntrustTrade>> maping, List<EntrustTrade> listed, BigDecimal matchonePrice)
-    /*     */ {
+
+    public static void matchOneEnd(List<Accountadd> exEntrustAccountadd, EntrustTrade exEntrust, Map<String, List<EntrustTrade>> maping, List<EntrustTrade> listed, BigDecimal matchonePrice) {
         /* 199 */
         aaddlists.addAll(0, exEntrustAccountadd);
         /* 200 */
@@ -356,9 +289,9 @@ import java.util.Map.Entry;
             putSelfEntrustTradelist(exEntrust);
             /* 203 */
             setSelfonePrice(exEntrust);
-            /*     */
+
         }
-        /*     */
+
         /* 206 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
         /* 207 */
@@ -369,25 +302,25 @@ import java.util.Map.Entry;
             if ((null == listing) || (listing.size() == 0)) {
                 /* 210 */
                 redisTradeService.delete((String) entry.getKey());
-                /*     */
+
             } else {
                 /* 212 */
                 redisTradeService.save((String) entry.getKey(), JSON.toJSONString(listing));
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
-        /*     */
+
+
         /* 217 */
         MQEnter.pushDealFundMQ(aaddlists);
-        /*     */
-        /*     */
+
+
         /* 220 */
         for (EntrustTrade entrust : listed) {
             /* 221 */
             putEntrustByUser(entrust);
-            /*     */
+
         }
         /* 223 */
         setMatchOnePrice(matchonePrice, exEntrust);
@@ -395,16 +328,16 @@ import java.util.Map.Entry;
         String keyFront = getHeaderFront(exEntrust);
         /* 225 */
         setExchangeDataCache(eoinfolists, keyFront);
-        /*     */
+
         /* 227 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 228 */
         redisService.save(getTradeDealEntrustChangeNum(), JSON.toJSONString(listed));
         /* 229 */
         redisService.save(getTradeDealOrderInfoChangeNum(), JSON.toJSONString(eoinfolists));
-        /*     */
-        /*     */
-        /*     */
+
+
+
         /* 233 */
         List<ExOrderInfo> arr = new ArrayList();
         /* 234 */
@@ -417,28 +350,26 @@ import java.util.Map.Entry;
         aaddlists.clear();
         /* 238 */
         eoinfolists.clear();
-        /*     */
+
         /* 240 */
         redisTradeService.save(getEntrustTimeFlag(exEntrust.getCoinCode(), exEntrust.getFixPriceCoinCode()), "1");
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void cancelEntrust(EntrustTrade exEntrust, List<EntrustTrade> entrustlist, String key, List<Accountadd> aadds)
-    /*     */ {
+
+    public static void cancelEntrust(EntrustTrade exEntrust, List<EntrustTrade> entrustlist, String key, List<Accountadd> aadds) {
         /* 245 */
         putIngExEntrust(entrustlist, key);
-        /*     */
+
         /* 247 */
         MQEnter.pushDealFundMQ(aadds);
-        /*     */
+
         /* 249 */
         putEntrustByUser(exEntrust);
         /* 250 */
         setcancelSelfOnePrice(exEntrust);
-        /*     */
-        /*     */
+
+
         /* 253 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 254 */
@@ -447,18 +378,16 @@ import java.util.Map.Entry;
         listchange.add(exEntrust);
         /* 256 */
         redisService.save(getTradeDealEntrustChangeNum(), JSON.toJSONString(listchange));
-        /*     */
+
         /* 258 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
         /* 259 */
         redisTradeService.save(getEntrustTimeFlag(exEntrust.getCoinCode(), exEntrust.getFixPriceCoinCode()), "1");
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void setcancelSelfOnePrice(EntrustTrade exEntrust)
-    /*     */ {
+
+    public static void setcancelSelfOnePrice(EntrustTrade exEntrust) {
         /* 264 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 265 */
@@ -477,18 +406,18 @@ import java.util.Map.Entry;
                     String buyonePricekey = keyFront + ":" + "buyonePrice";
                     /* 272 */
                     redisService.save(buyonePricekey, JSON.toJSONString(onePrice));
-                    /*     */
+
                 } else {
                     /* 274 */
                     String sellonePricekey = keyFront + ":" + "sellonePrice";
                     /* 275 */
                     redisService.save(sellonePricekey, JSON.toJSONString(onePrice));
-                    /*     */
+
                 }
-                /*     */
-                /*     */
+
+
             }
-            /*     */
+
         }
         /* 280 */
         else if (exEntrust.getType().equals(Integer.valueOf(1))) {
@@ -496,22 +425,19 @@ import java.util.Map.Entry;
             String buyonePricekey = keyFront + ":" + "buyonePrice";
             /* 282 */
             redisService.delete(buyonePricekey);
-            /*     */
+
         } else {
             /* 284 */
             String sellonePricekey = keyFront + ":" + "sellonePrice";
             /* 285 */
             redisService.delete(sellonePricekey);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void setMatchOnePrice(BigDecimal matchonePrice, EntrustTrade exEntrust)
-    /*     */ {
+
+    public static void setMatchOnePrice(BigDecimal matchonePrice, EntrustTrade exEntrust) {
         /* 292 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 293 */
@@ -524,16 +450,16 @@ import java.util.Map.Entry;
                 String buyonePricekey = keyFront + ":" + "buyonePrice";
                 /* 297 */
                 redisService.save(buyonePricekey, JSON.toJSONString(matchonePrice));
-                /*     */
+
             } else {
                 /* 299 */
                 String sellonePricekey = keyFront + ":" + "sellonePrice";
                 /* 300 */
                 redisService.save(sellonePricekey, JSON.toJSONString(matchonePrice));
-                /*     */
+
             }
-            /*     */
-            /*     */
+
+
         }
         /* 304 */
         else if (exEntrust.getType().equals(Integer.valueOf(2))) {
@@ -541,7 +467,7 @@ import java.util.Map.Entry;
             String buyonePricekey = keyFront + ":" + "buyonePrice";
             /* 306 */
             redisService.delete(buyonePricekey);
-            /*     */
+
         } else {
             /* 308 */
             String sellonePricekey = keyFront + ":" + "sellonePrice";
@@ -549,24 +475,21 @@ import java.util.Map.Entry;
             redisService.save(sellonePricekey, JSON.toJSONString(matchonePrice));
             /* 310 */
             redisService.delete(sellonePricekey);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void setExchangeDataCache(List<ExOrderInfo> listExOrderInfo, String header)
-    /*     */ {
+
+    public static void setExchangeDataCache(List<ExOrderInfo> listExOrderInfo, String header) {
         /* 317 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 318 */
         ExOrderInfo exOrderInfo = (ExOrderInfo) listExOrderInfo.get(listExOrderInfo.size() - 1);
-        /*     */
+
         /* 320 */
         setStringData(header + ":" + "currentExchangPrice", exOrderInfo.getTransactionPrice().setScale(10, 4).toString());
-        /*     */
+
         /* 322 */
         String v = redisService.get(header + ":" + "LastOrderRecords");
         /* 323 */
@@ -575,11 +498,11 @@ import java.util.Map.Entry;
         if (!StringUtil.isEmpty(v)) {
             /* 325 */
             list = JSON.parseArray(v, ExOrderInfo.class);
-            /*     */
+
         } else {
             /* 327 */
             list = new ArrayList();
-            /*     */
+
         }
         /* 329 */
         list.addAll(listExOrderInfo);
@@ -589,20 +512,17 @@ import java.util.Map.Entry;
             List<ExOrderInfo> sublist = list.subList(list.size() - ExchangeDataCacheRedis.LastOrderRecordsLmit.intValue(), list.size());
             /* 332 */
             redisService.save(header + ":" + "LastOrderRecords", JSON.toJSONString(sublist));
-            /*     */
+
         } else {
             /* 334 */
             redisService.save(header + ":" + "LastOrderRecords", JSON.toJSONString(list));
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void putEntrustByUser(EntrustTrade entrust)
-    /*     */ {
+
+    public static void putEntrustByUser(EntrustTrade entrust) {
         /* 341 */
         Boolean flag = isSaveEntrustByUser(entrust.getUserName());
         /* 342 */
@@ -617,32 +537,29 @@ import java.util.Map.Entry;
                 ebu.addEntrust(entrust);
                 /* 347 */
                 ebu.setCustomerId(entrust.getCustomerId());
-                /*     */
+
             } else {
                 /* 349 */
                 ebu.addEntrust(entrust);
-                /*     */
+
             }
             /* 351 */
             if ((ebu.getEntrustedmap().size() == 0) && (ebu.getEntrustingmap().size() == 0)) {
                 /* 352 */
                 redisUtilEntrustByUser.delete(ebu.getCustomerId().toString());
-                /*     */
+
             } else {
                 /* 354 */
                 redisUtilEntrustByUser.put(ebu, ebu.getCustomerId().toString());
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static Boolean isSaveEntrustByUser(String userName)
-    /*     */ {
+
+    public static Boolean isSaveEntrustByUser(String userName) {
         /* 362 */
         if (null != isNoSaveEntrustByUser) {
             /* 363 */
@@ -657,18 +574,18 @@ import java.util.Map.Entry;
                     if (rt[i].equals(userName)) {
                         /* 368 */
                         return Boolean.valueOf(true);
-                        /*     */
+
                     }
                     /* 370 */
                     i++;
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
             /* 374 */
             return Boolean.valueOf(false);
-            /*     */
+
         }
         /* 376 */
         isNoSaveEntrustByUser = new Integer("1");
@@ -685,28 +602,25 @@ import java.util.Map.Entry;
             /* 382 */
             while (i < rt.length) {
                 /* 383 */
-                if (rt[i].equals(userName))
-                    /*     */ {
+                if (rt[i].equals(userName)) {
                     /* 385 */
                     return Boolean.valueOf(true);
-                    /*     */
+
                 }
                 /* 387 */
                 i++;
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 391 */
         return Boolean.valueOf(false);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void putchange(EntrustTrade entrust)
-    /*     */ {
+
+    public static void putchange(EntrustTrade entrust) {
         /* 396 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 397 */
@@ -717,20 +631,19 @@ import java.util.Map.Entry;
         if (null == list) {
             /* 400 */
             list = new ArrayList();
-            /*     */
+
         }
-        /*     */
+
         /* 403 */
         list.add(entrust);
-        /*     */
-        /*     */
+
+
         /* 406 */
         redisService.save("changeEntrust", JSON.toJSONString(list));
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void matchOneAndOneEnd(ExOrderInfo exOrderInfo, List<Accountadd> aadds) {
         /* 410 */
         eoinfolists.add(exOrderInfo);
@@ -738,30 +651,13 @@ import java.util.Map.Entry;
         for (Accountadd aadd : aadds) {
             /* 412 */
             aaddlists.add(aadd);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public static void putExOrderInfolist(List<ExOrderInfo> oinfolist)
-    /*     */ {
+
+    public static void putExOrderInfolist(List<ExOrderInfo> oinfolist) {
         /* 433 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 434 */
@@ -772,21 +668,20 @@ import java.util.Map.Entry;
         if (null == list) {
             /* 437 */
             list = new ArrayList();
-            /*     */
+
         }
         /* 439 */
         for (ExOrderInfo info : oinfolist) {
             /* 440 */
             list.add(info);
-            /*     */
+
         }
         /* 442 */
         redisService.save("exorderinfos", JSON.toJSONString(list));
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void putSelfEntrustTradelist(EntrustTrade exEntrust) {
         /* 446 */
         String key = getHeader(exEntrust) + ":" + exEntrust.getEntrustPrice().setScale(10, 6).toString();
@@ -800,20 +695,17 @@ import java.util.Map.Entry;
         if (null == list) {
             /* 451 */
             list = new ArrayList();
-            /*     */
+
         }
         /* 453 */
         list.add(exEntrust);
         /* 454 */
         redisTradeService.save(key, JSON.toJSONString(list));
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static BigDecimal getMatchOnePrice(EntrustTrade exEntrust)
-    /*     */ {
+
+    public static BigDecimal getMatchOnePrice(EntrustTrade exEntrust) {
         /* 460 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 461 */
@@ -822,11 +714,11 @@ import java.util.Map.Entry;
         if (exEntrust.getType().equals(Integer.valueOf(1))) {
             /* 463 */
             key = getHeaderFront(exEntrust) + ":" + "sellonePrice";
-            /*     */
+
         } else {
             /* 465 */
             key = getHeaderFront(exEntrust) + ":" + "buyonePrice";
-            /*     */
+
         }
         /* 467 */
         String onePrice = redisService.get(key);
@@ -834,61 +726,42 @@ import java.util.Map.Entry;
         if (StringUtil.isEmpty(onePrice)) {
             /* 469 */
             return null;
-            /*     */
+
         }
         /* 471 */
         return new BigDecimal(onePrice);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public static void putIngExEntrust(List<EntrustTrade> exEntrustlist, String key)
-    /*     */ {
+
+    public static void putIngExEntrust(List<EntrustTrade> exEntrustlist, String key) {
         /* 490 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
-        /*     */
-        /*     */
-        /*     */
-        /*     */
-        /*     */
+
+
+
+
+
         /* 496 */
         if ((null == exEntrustlist) || (exEntrustlist.size() == 0)) {
             /* 497 */
             redisTradeService.delete(key);
-            /*     */
+
         } else {
             /* 499 */
             redisTradeService.save(key, JSON.toJSONString(exEntrustlist));
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void put(List<EntrustTrade> exEntrustlist, String type)
-    /*     */ {
+
+    public static void put(List<EntrustTrade> exEntrustlist, String type) {
         /* 506 */
         if ((null == exEntrustlist) || (exEntrustlist.size() == 0)) {
             /* 507 */
             return;
-            /*     */
+
         }
         /* 509 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -902,7 +775,7 @@ import java.util.Map.Entry;
             if (null == list) {
                 /* 514 */
                 redisService.save("changeEntrust", JSON.toJSONString(exEntrustlist));
-                /*     */
+
             } else {
                 /* 516 */
                 for (EntrustTrade entrust : exEntrustlist) {
@@ -910,22 +783,19 @@ import java.util.Map.Entry;
                     list.add(entrust);
                     /* 518 */
                     putEntrustByUser(entrust);
-                    /*     */
+
                 }
                 /* 520 */
                 redisService.save("changeEntrust", JSON.toJSONString(list));
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public static void put(ExOrderInfo exOrderInfo)
-    /*     */ {
+
+    public static void put(ExOrderInfo exOrderInfo) {
         /* 528 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 529 */
@@ -936,11 +806,10 @@ import java.util.Map.Entry;
         list.add(exOrderInfo);
         /* 532 */
         redisService.save("exorderinfos", JSON.toJSONString(list));
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void put(Accountadd accountadd) {
         /* 536 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -952,11 +821,10 @@ import java.util.Map.Entry;
         list.add(accountadd);
         /* 540 */
         redisService.save("Accountadds", JSON.toJSONString(list));
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getStringData(String key) {
         /* 544 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
@@ -964,34 +832,31 @@ import java.util.Map.Entry;
         String v = redisService.get(key);
         /* 546 */
         return v;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static String getTradeStringData(String key) {
         /* 550 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
-        /*     */
+
         /* 552 */
         String v = redisTradeService.get(key);
         /* 553 */
         return v;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void setStringData(String key, String val) {
         /* 557 */
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /* 558 */
         String preData = redisService.save(key, val);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static List<BigDecimal> getSelfkeys(EntrustTrade exEntrust) {
         /* 562 */
         String key = getHeader(exEntrust);
@@ -1003,7 +868,7 @@ import java.util.Map.Entry;
         if (null == keys) {
             /* 566 */
             return null;
-            /*     */
+
         }
         /* 568 */
         List<BigDecimal> list2 = new ArrayList();
@@ -1017,25 +882,24 @@ import java.util.Map.Entry;
             BigDecimal ks = new BigDecimal(keystr.split(":")[2]);
             /* 573 */
             list2.add(ks);
-            /*     */
+
         }
         /* 575 */
         if (exEntrust.getType().equals(Integer.valueOf(2))) {
             /* 576 */
             Collections.sort(list2, new AscBigDecimalComparator());
-            /*     */
+
         } else {
             /* 578 */
             Collections.sort(list2, new DescBigDecimalComparator());
-            /*     */
+
         }
         /* 580 */
         return list2;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static List<BigDecimal> getMatchkeys(EntrustTrade exEntrust) {
         /* 584 */
         String key = getHeaderMatch(exEntrust);
@@ -1047,7 +911,7 @@ import java.util.Map.Entry;
         if (null == keys) {
             /* 588 */
             return null;
-            /*     */
+
         }
         /* 590 */
         List<BigDecimal> list2 = new ArrayList();
@@ -1061,27 +925,25 @@ import java.util.Map.Entry;
             BigDecimal ks = new BigDecimal(keystr.split(":")[2]);
             /* 595 */
             list2.add(ks);
-            /*     */
+
         }
         /* 597 */
         if (exEntrust.getType().equals(Integer.valueOf(1))) {
             /* 598 */
             Collections.sort(list2, new AscBigDecimalComparator());
-            /*     */
+
         } else {
             /* 600 */
             Collections.sort(list2, new DescBigDecimalComparator());
-            /*     */
+
         }
         /* 602 */
         return list2;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static List<EntrustTrade> getMatchEntrustTradeBykey(String keys)
-    /*     */ {
+
+    public static List<EntrustTrade> getMatchEntrustTradeBykey(String keys) {
         /* 607 */
         RedisTradeService redisTradeService = (RedisTradeService) ContextUtil.getBean("redisTradeService");
         /* 608 */
@@ -1090,9 +952,9 @@ import java.util.Map.Entry;
         List<EntrustTrade> list = JSON.parseArray(v, EntrustTrade.class);
         /* 610 */
         return list;
-        /*     */
+
     }
-    /*     */
+
 }
 
 

@@ -1,53 +1,27 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.websoketContext.model;
-/*    */
-/*    */
+
 
 import java.util.List;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class MarketTrades
-        /*    */ {
-    /*    */   public List<MarketTradesSub> trades;
 
-    /*    */
-    /*    */
-    public List<MarketTradesSub> getTrades()
-    /*    */ {
+public class MarketTrades {
+    public List<MarketTradesSub> trades;
+
+
+    public List<MarketTradesSub> getTrades() {
         /* 28 */
         return this.trades;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    public void setTrades(List<MarketTradesSub> trades)
-    /*    */ {
+
+    public void setTrades(List<MarketTradesSub> trades) {
         /* 36 */
         this.trades = trades;
-        /*    */
+
     }
-    /*    */
+
 }
 
 

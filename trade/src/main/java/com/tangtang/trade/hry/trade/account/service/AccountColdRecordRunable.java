@@ -1,49 +1,27 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service;
-/*    */
-/*    */
+
 
 import hry.account.fund.model.AppColdAccountRecord;
 import hry.core.util.sys.ContextUtil;
 import org.apache.log4j.Logger;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class AccountColdRecordRunable
-        /*    */ implements Runnable
-        /*    */ {
-    /* 23 */   private static final Logger log = Logger.getLogger(AccountColdRecordRunable.class);
-    /*    */
-    /*    */   public AppColdAccountRecord coldAccountRecord;
 
-    /*    */
-    /*    */
-    /*    */
-    public AccountColdRecordRunable(AppColdAccountRecord coldAccountRecord)
-    /*    */ {
+public class AccountColdRecordRunable
+        implements Runnable {
+    /* 23 */   private static final Logger log = Logger.getLogger(AccountColdRecordRunable.class);
+
+    public AppColdAccountRecord coldAccountRecord;
+
+
+    public AccountColdRecordRunable(AppColdAccountRecord coldAccountRecord) {
         /* 30 */
         this.coldAccountRecord = coldAccountRecord;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    public void run()
-    /*    */ {
+
+    public void run() {
         /* 35 */
         long end = System.currentTimeMillis();
         /* 36 */
@@ -54,9 +32,9 @@ import org.apache.log4j.Logger;
         appColdAccountRecordService.save(this.coldAccountRecord);
         /* 39 */
         long start = System.currentTimeMillis();
-        /*    */
+
     }
-    /*    */
+
 }
 
 

@@ -1,27 +1,14 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.websoketContext;
-/*     */
-/*     */
+
 
 import hry.core.util.sys.ContextUtil;
 import hry.redis.common.utils.RedisService;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */ public class PushData
-        /*     */ {
-    /*     */
-    public static void pushEntrust(String pustdata, String currencyType)
-    /*     */ {
+
+public class PushData {
+
+    public static void pushEntrust(String pustdata, String currencyType) {
         /*  19 */
         String key = currencyType + ":pushEntrust";
         /*  20 */
@@ -32,13 +19,12 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  23 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void pushNewRecordList(String pustdata, String currencyType) {
         /*  28 */
         String key = currencyType + ":pushNewRecordList";
@@ -50,15 +36,13 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  32 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void pushIndex(String pustdata, String currencyType)
-    /*     */ {
+
+    public static void pushIndex(String pustdata, String currencyType) {
         /*  38 */
         String key = currencyType + ":pushIndex";
         /*  39 */
@@ -69,17 +53,13 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  42 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public static void pushEntrusMarket(String pustdata, String header)
-    /*     */ {
+
+    public static void pushEntrusMarket(String pustdata, String header) {
         /*  50 */
         String key = header + ":pushEntrusMarket";
         /*  51 */
@@ -90,13 +70,12 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  54 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void pushtheSeatEntrustCenter(String pustdata, String currencyType) {
         /*  59 */
         String key = currencyType + ":pushtheSeatEntrustCenter";
@@ -108,15 +87,13 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  63 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void pushtheSeatEntrustDephCenter(String pustdata, String currencyType, String key1)
-    /*     */ {
+
+    public static void pushtheSeatEntrustDephCenter(String pustdata, String currencyType, String key1) {
         /*  69 */
         String key = currencyType + ":pushtheSeatEntrustCenter" + key1;
         /*  70 */
@@ -127,15 +104,13 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  73 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public static void pushEntrusDephMarket(String pustdata, String currencyType, String key1)
-    /*     */ {
+
+    public static void pushEntrusDephMarket(String pustdata, String currencyType, String key1) {
         /*  79 */
         String key = currencyType + ":pushEntrusMarket" + key1;
         /*  80 */
@@ -146,13 +121,12 @@ import hry.redis.common.utils.RedisService;
         if ((null == preData) || (!preData.equals(pustdata))) {
             /*  83 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void pushNewListRecordMarketAsc(String pustdata, String currencyType) {
         /*  88 */
         String key = currencyType + ":pushNewListRecordMarket";
@@ -160,11 +134,10 @@ import hry.redis.common.utils.RedisService;
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /*  90 */
         redisService.save(key, pustdata);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void pushNewListRecordMarketDesc(String pustdata, String header) {
         /*  94 */
         String key = header + ":pushNewListRecordMarketDesc";
@@ -172,11 +145,10 @@ import hry.redis.common.utils.RedisService;
         RedisService redisService = (RedisService) ContextUtil.getBean("redisService");
         /*  96 */
         redisService.save(key, pustdata);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public static void pushNewListRecordMarketnewAdd(String pustdata, String currencyType) {
         /* 100 */
         String key = currencyType + ":pushNewListRecordMarketnewAdd";
@@ -186,11 +158,11 @@ import hry.redis.common.utils.RedisService;
         if (!"".equals(pustdata)) {
             /* 103 */
             redisService.save(key, pustdata);
-            /*     */
+
         }
-        /*     */
+
     }
-    /*     */
+
 }
 
 

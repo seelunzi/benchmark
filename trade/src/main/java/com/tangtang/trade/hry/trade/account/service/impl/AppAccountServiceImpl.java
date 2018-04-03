@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.account.service.impl;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import hry.account.fund.model.AppAccount;
@@ -20,88 +19,32 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-@Service("appAccountService")
-/*     */ public class AppAccountServiceImpl
-        /*     */ extends BaseServiceImpl<AppAccount, Long>
-        /*     */ implements AppAccountService
-        /*     */ {
-    /*     */
-    @Resource
-    /*     */ private AppColdAccountRecordService appColdAccountRecordService;
-    /*     */
-    @Resource
-    /*     */ private AppHotAccountRecordService appHotAccountRecordService;
 
-    /*     */
-    /*     */
+@Service("appAccountService")
+public class AppAccountServiceImpl
+        extends BaseServiceImpl<AppAccount, Long>
+        implements AppAccountService {
+
+    @Resource
+    private AppColdAccountRecordService appColdAccountRecordService;
+
+    @Resource
+    private AppHotAccountRecordService appHotAccountRecordService;
+
+
+
     @Resource(name = "appAccountDao")
-    /*     */ public void setDao(BaseDao<AppAccount, Long> dao)
-    /*     */ {
+    public void setDao(BaseDao<AppAccount, Long> dao) {
         /*  62 */
         this.dao = dao;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public AppColdAccountRecord createColdRecord(Integer recordType, AppAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark)
-    /*     */ {
+
+    public AppColdAccountRecord createColdRecord(Integer recordType, AppAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark) {
         /*  74 */
         Integer status = Integer.valueOf(5);
-        /*     */
+
         /*  76 */
         AppColdAccountRecord coldAccountRecord = new AppColdAccountRecord();
         /*  77 */
@@ -130,15 +73,11 @@ import java.math.BigDecimal;
         coldAccountRecord.setRemark(AccountRemarkEnum.getName(remark.intValue()));
         /*  89 */
         return coldAccountRecord;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public AppHotAccountRecord createHotRecord(Integer recordType, AppAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark)
-    /*     */ {
+
+    public AppHotAccountRecord createHotRecord(Integer recordType, AppAccount account, BigDecimal freezeMoney, String transactionNum, Integer remark) {
         /*  96 */
         Integer status = Integer.valueOf(5);
         /*  97 */
@@ -169,47 +108,37 @@ import java.math.BigDecimal;
         hotAccountRecord.setRemark(AccountRemarkEnum.getName(remark.intValue()));
         /* 110 */
         return hotAccountRecord;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public AppAccountRedis getAppAccountByRedis(String id)
-    /*     */ {
+
+    public AppAccountRedis getAppAccountByRedis(String id) {
         /* 118 */
         Object obj = TradeRedis.redisUtilAppAccount.get(id);
         /* 119 */
-        if (null == obj)
-            /*     */ {
+        if (null == obj) {
             /* 121 */
             AppAccount account = (AppAccount) get(Long.valueOf(id));
             /* 122 */
             AppAccountRedis accountr = (AppAccountRedis) JSON.parseObject(JSON.toJSONString(account), AppAccountRedis.class);
             /* 123 */
             return accountr;
-            /*     */
+
         }
         /* 125 */
         AppAccountRedis accountr = (AppAccountRedis) obj;
         /* 126 */
         return accountr;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setAppAccounttoRedis(AppAccountRedis appAccount)
-    /*     */ {
+
+    public void setAppAccounttoRedis(AppAccountRedis appAccount) {
         /* 133 */
         TradeRedis.redisUtilAppAccount.put(appAccount, appAccount.getId().toString());
-        /*     */
+
     }
-    /*     */
+
 }
 
 

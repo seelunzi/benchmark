@@ -23,8 +23,4 @@
     <dubbo:protocol name="dubbo" host="${dubbo.host}" port="${dubbo.port}"/>
     <!-- 提供者-->
     <dubbo:provider timeout="600000" retries="0"/>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~接口实现和发布~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-
 </beans>  

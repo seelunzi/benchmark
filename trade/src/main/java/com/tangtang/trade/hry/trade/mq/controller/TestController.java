@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.mq.controller;
-/*    */
-/*    */
+
 
 import hry.core.mvc.model.page.JsonResult;
 import hry.core.util.springmvcPropertyeditor.DateTimePropertyEditorSupport;
@@ -18,77 +17,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-@Controller
-/*    */
-@RequestMapping({"/test"})
-/*    */ public class TestController
-        /*    */ {
-    /*    */
-    @Resource
-    /*    */ private MessageProducer messageProducer;
 
-    /*    */
-    /*    */
+@Controller
+
+@RequestMapping({"/test"})
+public class TestController {
+
+    @Resource
+    private MessageProducer messageProducer;
+
+
+
     @InitBinder
-    /*    */ public void initBinder(ServletRequestDataBinder binder)
-    /*    */ {
+    public void initBinder(ServletRequestDataBinder binder) {
         /* 37 */
         binder.registerCustomEditor(Date.class, new DateTimePropertyEditorSupport());
-        /*    */
-        /*    */
-        /*    */
-        /*    */
+
+
+
+
         /* 42 */
         binder.registerCustomEditor(String.class, new StringPropertyEditorSupport(true, false));
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
-    /*    */
+
     @RequestMapping({"sell"})
-    /*    */
+
     @ResponseBody
-    /*    */ public JsonResult sell(HttpServletRequest request, HttpServletResponse response)
-    /*    */ {
+    public JsonResult sell(HttpServletRequest request, HttpServletResponse response) {
         /* 59 */
         return new JsonResult();
-        /*    */
+
     }
-    /*    */
+
 }
 
 

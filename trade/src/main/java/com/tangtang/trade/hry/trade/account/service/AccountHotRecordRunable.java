@@ -1,53 +1,30 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service;
-/*    */
-/*    */
+
 
 import hry.account.fund.model.AppHotAccountRecord;
 import hry.core.util.sys.ContextUtil;
 import org.apache.log4j.Logger;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class AccountHotRecordRunable
-        /*    */ implements Runnable
-        /*    */ {
-    /* 23 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
-    /*    */
-    /*    */   private AppHotAccountRecord hotAccountRecord;
 
-    /*    */
-    /*    */
-    /*    */
-    public AccountHotRecordRunable(AppHotAccountRecord hotAccountRecord)
-    /*    */ {
+public class AccountHotRecordRunable
+        implements Runnable {
+    /* 23 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
+
+    private AppHotAccountRecord hotAccountRecord;
+
+
+    public AccountHotRecordRunable(AppHotAccountRecord hotAccountRecord) {
         /* 30 */
         this.hotAccountRecord = hotAccountRecord;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    public void run()
-    /*    */ {
+
+    public void run() {
         /* 36 */
         long start = System.currentTimeMillis();
-        /*    */
+
         /* 38 */
         AppHotAccountRecordService appHotAccountRecordService = (AppHotAccountRecordService) ContextUtil.getBean("appHotAccountRecordService");
         /* 39 */
@@ -56,9 +33,9 @@ import org.apache.log4j.Logger;
         appHotAccountRecordService.save(this.hotAccountRecord);
         /* 41 */
         long end = System.currentTimeMillis();
-        /*    */
+
     }
-    /*    */
+
 }
 
 

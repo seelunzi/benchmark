@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.mq;
-/*    */
-/*    */
+
 
 import com.rabbitmq.client.Channel;
 import hry.core.mvc.model.log.AppException;
@@ -14,29 +13,16 @@ import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
 
 import java.io.IOException;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class MessageAccount
-        /*    */ implements ChannelAwareMessageListener
-        /*    */ {
+
+public class MessageAccount
+        implements ChannelAwareMessageListener {
     /* 18 */   private Logger logger = Logger.getLogger(MessageAccount.class);
 
-    /*    */
-    /*    */
-    public void onMessage(Message message, Channel channel)
-    /*    */ {
+
+    public void onMessage(Message message, Channel channel) {
         /* 22 */
         TradeService tradeService = (TradeService) ContextUtil.getBean("tradeService");
-        /*    */
+
         try {
             /* 24 */
             Boolean flag = tradeService.accountaddQueue(new String(message.getBody()));
@@ -52,15 +38,12 @@ import java.io.IOException;
                 appExceptionService.save(exceptionLog);
                 /* 30 */
                 channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
-                /*    */
+
             }
-            /*    */
-        }
-        /*    */ catch (Exception e)
-            /*    */ {
-            /*    */
-            try
-                /*    */ {
+
+        } catch (Exception e) {
+
+            try {
                 /* 37 */
                 AppException exceptionLog = new AppException();
                 /* 38 */
@@ -71,32 +54,30 @@ import java.io.IOException;
                 appExceptionService.save(exceptionLog);
                 /* 41 */
                 channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
-                /*    */
-            }
-            /*    */ catch (IOException a) {
+
+            } catch (IOException a) {
                 /* 44 */
                 a.printStackTrace();
-                /*    */
+
             }
-            /*    */
+
         }
-        /*    */
-        /*    */
-        try
-            /*    */ {
+
+
+        try {
             /* 50 */
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
-            /*    */
+
         } catch (IOException e1) {
             /* 52 */
             this.logger.info("mq==channel.basicAck==确认失败");
             /* 53 */
             e1.printStackTrace();
-            /*    */
+
         }
-        /*    */
+
     }
-    /*    */
+
 }
 
 

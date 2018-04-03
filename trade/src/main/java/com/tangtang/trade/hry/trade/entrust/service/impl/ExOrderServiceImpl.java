@@ -1,7 +1,6 @@
-/*     */
+
 package com.tangtang.trade.hry.trade.entrust.service.impl;
-/*     */
-/*     */
+
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -35,99 +34,35 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-/*     */
-@Service("exOrderService")
-/*     */ public class ExOrderServiceImpl
-        /*     */ extends BaseServiceImpl<ExOrder, Long>
-        /*     */ implements ExOrderService
-        /*     */ {
-    /*     */
-    @Resource
-    /*     */ public RedisService redisService;
-    /*     */
-    @Resource
-    /*     */ public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
-    /*     */
-    @Resource
-    /*     */ public ExEntrustService exEntrustService;
-    /*     */
-    @Resource
-    /*     */ public ExOrderInfoDao exOrderInfoDao;
 
-    /*     */
-    /*     */
+@Service("exOrderService")
+public class ExOrderServiceImpl
+        extends BaseServiceImpl<ExOrder, Long>
+        implements ExOrderService {
+
+    @Resource
+    public RedisService redisService;
+
+    @Resource
+    public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
+
+    @Resource
+    public ExEntrustService exEntrustService;
+
+    @Resource
+    public ExOrderInfoDao exOrderInfoDao;
+
+
+
     @Resource(name = "exOrderDao")
-    /*     */ public void setDao(BaseDao<ExOrder, Long> dao)
-    /*     */ {
+    public void setDao(BaseDao<ExOrder, Long> dao) {
         /*  72 */
         this.dao = dao;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setCurrentExchangPrice(String header)
-    /*     */ {
+
+    public void setCurrentExchangPrice(String header) {
         /*  86 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
         /*  87 */
@@ -152,7 +87,7 @@ import java.util.*;
             TradeRedis.setStringData(header + ":" + "currentExchangDate", DateUtil.dateToString(((ExOrder) list.get(0)).getTransactionTime(), "yyyy-MM-dd").toString());
             /*  97 */
             TradeRedis.setStringData(header + ":" + "currentExchangTime", DateUtil.dateToString(((ExOrder) list.get(0)).getTransactionTime(), "yyyy-MM-dd HH:mm:ss").toString());
-            /*     */
+
         } else {
             /*  99 */
             TradeRedis.setStringData(header + ":" + "currentExchangPrice", "0.00");
@@ -160,15 +95,13 @@ import java.util.*;
             TradeRedis.setStringData(header + ":" + "currentExchangDate", DateUtil.dateToString(new Date(), "yyyy-MM-dd").toString());
             /* 101 */
             TradeRedis.setStringData(header + ":" + "currentExchangTime", DateUtil.dateToString(new Date(), "yyyy-MM-dd HH:mm:ss").toString());
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public void setLastExchangPrice(String header)
-    /*     */ {
+
+    public void setLastExchangPrice(String header) {
         /* 107 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
         /* 108 */
@@ -185,7 +118,7 @@ import java.util.*;
         map.put("fixPriceCoinCode", headarry[2].split("_")[1]);
         /* 114 */
         List<ExOrder> list = exOrderDao.getLastExchangPrice(map);
-        /*     */
+
         /* 116 */
         if ((null != list) && (list.size() != 0)) {
             /* 117 */
@@ -196,21 +129,19 @@ import java.util.*;
             } else if (list.size() == 1) {
                 /* 120 */
                 TradeRedis.setStringData(header + ":" + "lastExchangPrice", ((ExOrder) list.get(0)).getTransactionPrice().toString());
-                /*     */
+
             }
-            /*     */
+
         } else {
             /* 123 */
             TradeRedis.setStringData(header + ":" + "lastExchangPrice", "0.00");
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public void setOpenedExchangPrice(String header, BigDecimal issuePrice)
-    /*     */ {
+
+    public void setOpenedExchangPrice(String header, BigDecimal issuePrice) {
         /* 129 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
         /* 130 */
@@ -233,48 +164,41 @@ import java.util.*;
         if ((null != list) && (list.size() != 0)) {
             /* 139 */
             TradeRedis.setStringData(header + ":" + "openedExchangPrice", ((ExOrder) list.get(0)).getTransactionPrice().toString());
-            /*     */
-        }
-        /*     */
-        else {
+
+        } else {
             /* 142 */
             List<ExOrder> list1 = exOrderDao.getCurrentExchangPrice(map);
             /* 143 */
             if ((null != list1) && (list1.size() != 0)) {
                 /* 144 */
                 TradeRedis.setStringData(header + ":" + "openedExchangPrice", ((ExOrder) list1.get(0)).getTransactionPrice().toString());
-                /*     */
+
             } else {
                 /* 146 */
                 TradeRedis.setStringData(header + ":" + "openedExchangPrice", issuePrice == null ? "0.00" : issuePrice.toString());
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public void pushNewList(String header, Integer count)
-    /*     */ {
+
+    public void pushNewList(String header, Integer count) {
         /* 153 */
         PushData.pushNewRecordList(getNewList(header, count), header);
         /* 154 */
         PushData.pushNewListRecordMarketAsc(getNewListMarket(header, "asc"), header);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    public String getNewList(String header, Integer count)
-    /*     */ {
+
+    public String getNewList(String header, Integer count) {
         /* 160 */
         if (null == count) {
             /* 161 */
             count = Integer.valueOf(10);
-            /*     */
+
         }
         /* 163 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
@@ -300,7 +224,7 @@ import java.util.*;
             l.setTransactionPrice(l.getTransactionPrice().setScale(4, 4));
             /* 174 */
             l.setTransactionCount(l.getTransactionCount().setScale(4, 4));
-            /*     */
+
         }
         /* 176 */
         MarketTradesSelf marketTrades = new MarketTradesSelf();
@@ -310,23 +234,18 @@ import java.util.*;
         SimplePropertyPreFilter s = new SimplePropertyPreFilter(ExOrder.class, new String[]{"coinCode", "transactionTime", "transactionPrice", "transactionCount"});
         /* 179 */
         return JSON.toJSONString(marketTrades, s, new SerializerFeature[0]).toString();
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public String getNewListMarket(String header, String timeorder)
-    /*     */ {
+
+    public String getNewListMarket(String header, String timeorder) {
         /* 187 */
         String[] headarry = header.split("_");
         /* 188 */
         int keepDecimalForCoin = 8;
         /* 189 */
         int keepDecimalForCurrency = 8;
-        /*     */
+
         /* 191 */
         String str = this.redisService.get("cn:coinInfoList");
         /* 192 */
@@ -347,15 +266,15 @@ import java.util.*;
                         keepDecimalForCurrency = obj.getIntValue("keepDecimalForCurrency");
                         /* 200 */
                         break;
-                        /*     */
+
                     }
-                    /*     */
+
                 }
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 206 */
         Map<String, Object> seramap = new HashMap();
         /* 207 */
@@ -376,16 +295,14 @@ import java.util.*;
                 list = this.exOrderInfoDao.findNewList(seramap);
                 /* 215 */
                 this.redisService.save(header + ":" + "LastOrderRecords", JSON.toJSONString(list));
-                /*     */
+
             } else {
                 /* 217 */
                 list = JSON.parseArray(v, ExOrderInfo.class);
-                /*     */
+
             }
-            /*     */
-        }
-        /*     */
-        else {
+
+        } else {
             /* 221 */
             String v = this.redisService.get(header + ":" + "LastOrderRecords");
             /* 222 */
@@ -396,17 +313,17 @@ import java.util.*;
                 Collections.reverse(list);
                 /* 225 */
                 this.redisService.save(header + ":" + "LastOrderRecords", JSON.toJSONString(list));
-                /*     */
+
             } else {
                 /* 227 */
                 list = JSON.parseArray(v, ExOrderInfo.class);
                 /* 228 */
                 Collections.reverse(list);
-                /*     */
+
             }
-            /*     */
+
         }
-        /*     */
+
         /* 232 */
         List<MarketTradesSub> listsub = new ArrayList();
         /* 233 */
@@ -425,7 +342,7 @@ import java.util.*;
             sub.setTime(l.getTransactionTime().getTime() / 1000L);
             /* 240 */
             listsub.add(sub);
-            /*     */
+
         }
         /* 242 */
         SortList<MarketTradesSub> sort = new SortList();
@@ -437,13 +354,11 @@ import java.util.*;
         marketTrades.setTrades(listsub);
         /* 246 */
         return JSON.toJSONString(marketTrades).toString();
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    public String findNewListMarketnewAdd(String header, String minDate, String maxDate)
-    /*     */ {
+
+    public String findNewListMarketnewAdd(String header, String minDate, String maxDate) {
         /* 251 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
         /* 252 */
@@ -474,22 +389,20 @@ import java.util.*;
                 list = exOrderDao.findNewListnewAdd(seramap);
                 /* 265 */
                 this.redisService.setList(header + ":" + "LastOrderRecords", list);
-                /*     */
+
             } else {
                 /* 267 */
                 Collections.reverse(list);
-                /*     */
+
                 /* 269 */
                 this.redisService.setList(header + ":" + "LastOrderRecordAdds", new ArrayList());
-                /*     */
+
             }
-            /*     */
-        }
-        /*     */
-        else {
+
+        } else {
             /* 273 */
             list = exOrderDao.findNewListnewAdd(seramap);
-            /*     */
+
         }
         /* 275 */
         List<MarketTradesSub> listsub = new ArrayList();
@@ -511,7 +424,7 @@ import java.util.*;
                 sub.setTime(l.getTransactionTime().getTime() / 1000L);
                 /* 284 */
                 listsub.add(sub);
-                /*     */
+
             }
             /* 286 */
             MarketTrades marketTrades = new MarketTrades();
@@ -519,31 +432,26 @@ import java.util.*;
             marketTrades.setTrades(listsub);
             /* 288 */
             return JSON.toJSONString(marketTrades).toString();
-            /*     */
+
         }
         /* 290 */
         return "";
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public List<ExOrder> exAveragePrice(String coinCode)
-    /*     */ {
+
+    public List<ExOrder> exAveragePrice(String coinCode) {
         /* 297 */
         ExOrderDao exOrderDao = (ExOrderDao) this.dao;
         /* 298 */
         return exOrderDao.exAveragePrice(coinCode);
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public void setExchangeDataCache(ExOrderInfo exOrderInfo, ExOrder exOrder) {
     }
-    /*     */
+
 }
 
 

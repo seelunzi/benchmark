@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service.impl;
-/*    */
-/*    */
+
 
 import hry.core.mvc.dao.base.BaseDao;
 import hry.core.mvc.service.base.impl.BaseServiceImpl;
@@ -14,52 +13,21 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
+
 @Service("exDmColdAccountRecordService")
-/*    */ public class ExDmColdAccountRecordServiceImpl
-        /*    */ extends BaseServiceImpl<ExDmColdAccountRecord, Long>
-        /*    */ implements ExDmColdAccountRecordService
-        /*    */ {
-    /*    */
+public class ExDmColdAccountRecordServiceImpl
+        extends BaseServiceImpl<ExDmColdAccountRecord, Long>
+        implements ExDmColdAccountRecordService {
+
     @Resource(name = "exDmColdAccountRecordDao")
-    /*    */ public void setDao(BaseDao<ExDmColdAccountRecord, Long> dao)
-    /*    */ {
+    public void setDao(BaseDao<ExDmColdAccountRecord, Long> dao) {
         /* 38 */
         this.dao = dao;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    public List<ExDmColdAccountRecord> findColdAccountRecordBytransactionNum(String transactionNum)
-    /*    */ {
+
+    public List<ExDmColdAccountRecord> findColdAccountRecordBytransactionNum(String transactionNum) {
         /* 44 */
         QueryFilter filter = new QueryFilter(ExDmHotAccountRecord.class);
         /* 45 */
@@ -68,9 +36,9 @@ import java.util.List;
         List<ExDmColdAccountRecord> list = super.find(filter);
         /* 47 */
         return list;
-        /*    */
+
     }
-    /*    */
+
 }
 
 

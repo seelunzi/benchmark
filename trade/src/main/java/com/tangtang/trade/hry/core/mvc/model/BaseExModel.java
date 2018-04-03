@@ -8,177 +8,130 @@ import java.io.Serializable;
 import java.util.Date;
 
 @MappedSuperclass
-/*     */ public class BaseExModel
-        /*     */ implements Serializable
-        /*     */ {
-    /*     */   private static final long serialVersionUID = -4825890686624512635L;
-    /*     */
-    @Column(name = "saasId")
-    /*     */ private String saasId;
-    /*     */
-    @Column(name = "created")
-    /*     */ private Date created;
-    /*     */
-    @Column(name = "modified")
-    /*     */ private Date modified;
-    /*     */
-    @Column(name = "currencyType")
-    /*     */ private String currencyType;
-    /*     */
-    @Column(name = "website")
-    /*     */ private String website;
-    /*     */
-    @Transient
-    /*     */
-    @Column(name = "keepDecimalForCoin")
-    /*     */ private Integer keepDecimalForCoin;
-    /*     */
-    @Transient
-    /*     */
-    @Column(name = "keepDecimalForCurrency")
-    /*     */ private Integer keepDecimalForCurrency;
+public class BaseExModel
+        implements Serializable {
+    private static final long serialVersionUID = -4825890686624512635L;
 
-    /*     */
-    /*     */
-    public Integer getKeepDecimalForCoin()
-    /*     */ {
+    @Column(name = "saasId")
+    private String saasId;
+
+    @Column(name = "created")
+    private Date created;
+
+    @Column(name = "modified")
+    private Date modified;
+
+    @Column(name = "currencyType")
+    private String currencyType;
+
+    @Column(name = "website")
+    private String website;
+
+    @Transient
+
+    @Column(name = "keepDecimalForCoin")
+    private Integer keepDecimalForCoin;
+
+    @Transient
+
+    @Column(name = "keepDecimalForCurrency")
+    private Integer keepDecimalForCurrency;
+
+
+    public Integer getKeepDecimalForCoin() {
         /*  62 */
         return this.keepDecimalForCoin;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setKeepDecimalForCoin(Integer keepDecimalForCoin)
-    /*     */ {
+
+    public void setKeepDecimalForCoin(Integer keepDecimalForCoin) {
         /*  71 */
         this.keepDecimalForCoin = keepDecimalForCoin;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public Integer getKeepDecimalForCurrency()
-    /*     */ {
+
+    public Integer getKeepDecimalForCurrency() {
         /*  80 */
         return this.keepDecimalForCurrency;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setKeepDecimalForCurrency(Integer keepDecimalForCurrency)
-    /*     */ {
+
+    public void setKeepDecimalForCurrency(Integer keepDecimalForCurrency) {
         /*  89 */
         this.keepDecimalForCurrency = keepDecimalForCurrency;
-        /*     */
+
     }
 
-    /*     */
+
     /*  92 */
     public String getSaasId() {
         return this.saasId;
     }
 
-    /*     */
-    /*     */
-    public void setSaasId(String saasId)
-    /*     */ {
+
+    public void setSaasId(String saasId) {
         /*  96 */
         this.saasId = saasId;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public Date getCreated()
-    /*     */ {
+
+    public Date getCreated() {
         /* 104 */
         return this.created;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setCreated(Date created)
-    /*     */ {
+
+    public void setCreated(Date created) {
         /* 112 */
         this.created = created;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public Date getModified()
-    /*     */ {
+
+    public Date getModified() {
         /* 120 */
         return this.modified;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    /*     */
-    public void setModified(Date modified)
-    /*     */ {
+
+    public void setModified(Date modified) {
         /* 128 */
         this.modified = modified;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public String getCurrencyType() {
         /* 132 */
         return this.currencyType;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public void setCurrencyType(String currencyType) {
         /* 136 */
         this.currencyType = currencyType;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public String getWebsite() {
         /* 140 */
         return this.website;
-        /*     */
+
     }
 
-    /*     */
-    /*     */
+
     public void setWebsite(String website) {
         /* 144 */
         this.website = website;
-        /*     */
+
     }
-    /*     */
+
 }

@@ -1,4 +1,4 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.listener;
 
 
@@ -14,16 +14,14 @@ import hry.core.util.sys.ContextUtil;
 
 import javax.servlet.ServletContextEvent;
 
-/*    */
-/*    */ public class StartupListener
-        /*    */ extends ContextLoaderListener
-        /*    */ {
-    /*    */
-    public void contextInitialized(ServletContextEvent event)
-    /*    */ {
+
+public class StartupListener
+        extends ContextLoaderListener {
+
+    public void contextInitialized(ServletContextEvent event) {
         /* 34 */
         super.contextInitialized(event);
-        /*    */
+
         /* 36 */
         AppUtils.init(event.getServletContext());
         /* 37 */
@@ -32,12 +30,11 @@ import javax.servlet.ServletContextEvent;
         LogFactory.info("---------------------------------加载应用app----------------------------------------");
         /* 39 */
         LogFactory.info("------------------" + PropertiesUtils.APP.getProperty("app.loadApp") + "-----------------");
-        /*    */
+
         /* 41 */
         String isStartRobot = PropertiesUtils.APP.getProperty("app.isStartRobot");
         /* 42 */
-        if ((!StringUtil.isEmpty(isStartRobot)) && (isStartRobot.equals("true")))
-            /*    */ {
+        if ((!StringUtil.isEmpty(isStartRobot)) && (isStartRobot.equals("true"))) {
             /* 44 */
             ScheduleJob autoAddExEntrust = new ScheduleJob();
             /* 45 */
@@ -46,7 +43,7 @@ import javax.servlet.ServletContextEvent;
             autoAddExEntrust.setMethodName("autoAddExEntrust");
             /* 47 */
             QuartzManager.addJob("autoAddExEntrust", autoAddExEntrust, QuartzJob.class, "0/4 * * * * ?");
-            /*    */
+
             /* 49 */
             ScheduleJob cancelAutoAddExEntrust = new ScheduleJob();
             /* 50 */
@@ -55,11 +52,11 @@ import javax.servlet.ServletContextEvent;
             cancelAutoAddExEntrust.setMethodName("cancelAutoAddExEntrust");
             /* 52 */
             QuartzManager.addJob("cancelAutoAddExEntrust", cancelAutoAddExEntrust, QuartzJob.class, "0/30 * * * * ?");
-            /*    */
+
         }
-        /*    */
-        /*    */
-        /*    */
+
+
+
         /* 57 */
         ScheduleJob reidsToMysql = new ScheduleJob();
         /* 58 */
@@ -68,18 +65,17 @@ import javax.servlet.ServletContextEvent;
         reidsToMysql.setMethodName("reidsToMysqlmq");
         /* 60 */
         QuartzManager.addJob("reidsToMysql", reidsToMysql, QuartzJob.class, "0/2 * * * * ?");
-        /*    */
+
         try {
             /* 62 */
             Thread.sleep(300L);
-            /*    */
-        }
-        /*    */ catch (InterruptedException e) {
+
+        } catch (InterruptedException e) {
             /* 65 */
             e.printStackTrace();
-            /*    */
+
         }
-        /*    */
+
         /* 68 */
         ScheduleJob reidsToredisLog = new ScheduleJob();
         /* 69 */
@@ -88,8 +84,8 @@ import javax.servlet.ServletContextEvent;
         reidsToredisLog.setMethodName("reidsToredisLogmq");
         /* 71 */
         QuartzManager.addJob("reidsToredisLog", reidsToredisLog, QuartzJob.class, "0/2 * * * * ?");
-        /*    */
-        /*    */
+
+
         /* 74 */
         ScheduleJob jobRunTimepushMarket = new ScheduleJob();
         jobRunTimepushMarket.setSpringId("webSocketScheduleService");
@@ -104,7 +100,7 @@ import javax.servlet.ServletContextEvent;
         System.out.println("初始化交易数据：");
         /* 92 */
         System.out.println(end - start1);
-        /*    */
+
     }
-    /*    */
+
 }

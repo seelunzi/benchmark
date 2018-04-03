@@ -1,25 +1,10 @@
-/*    */
+
 package com.tangtang.trade.hry.core.mvc.model.constant;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class StaticConstantPool
-        /*    */ {
+
+public class StaticConstantPool {
     /* 19 */   public static String TIP_LOGINLOCK_TIME = "1";
-    /*    */
+
 }
 
 

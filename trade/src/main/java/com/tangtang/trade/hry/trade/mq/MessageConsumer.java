@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.mq;
-/*    */
-/*    */
+
 
 import hry.trade.mq.service.MessageProducer;
 import org.apache.log4j.Logger;
@@ -10,31 +9,24 @@ import org.springframework.amqp.core.MessageListener;
 
 import javax.annotation.Resource;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class MessageConsumer
-        /*    */ implements MessageListener
-        /*    */ {
-    /* 12 */   private Logger logger = Logger.getLogger(MessageConsumer.class);
-    /*    */
-    /*    */
-    @Resource
-    /*    */ private MessageProducer messageProducer;
 
-    /*    */
-    /*    */
-    public void onMessage(Message message)
-    /*    */ {
+public class MessageConsumer
+        implements MessageListener {
+    /* 12 */   private Logger logger = Logger.getLogger(MessageConsumer.class);
+
+
+    @Resource
+    private MessageProducer messageProducer;
+
+
+    public void onMessage(Message message) {
         /* 19 */
         this.logger.info("consumer receive message------->" + new String(message.getBody()));
         /* 20 */
         int i = 10 / 0;
-        /*    */
+
     }
-    /*    */
+
 }
 
 

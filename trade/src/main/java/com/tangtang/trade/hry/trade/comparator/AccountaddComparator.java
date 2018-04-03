@@ -1,4 +1,4 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.comparator;
 
 
@@ -6,12 +6,10 @@ import hry.trade.redis.model.Accountadd;
 
 import java.util.Comparator;
 
-/*    */ public class AccountaddComparator
-        /*    */ implements Comparator<Accountadd>
-        /*    */ {
-    /*    */
-    public int compare(Accountadd o1, Accountadd o2)
-    /*    */ {
+public class AccountaddComparator
+        implements Comparator<Accountadd> {
+
+    public int compare(Accountadd o1, Accountadd o2) {
         /* 13 */
         if (o1.getAccountId().compareTo(o2.getAccountId()) == 1)
             /* 14 */ return -1;
@@ -19,13 +17,13 @@ import java.util.Comparator;
         if (o1.getAccountId().compareTo(o2.getAccountId()) == -1) {
             /* 16 */
             return 1;
-            /*    */
+
         }
         /* 18 */
         return 0;
-        /*    */
+
     }
-    /*    */
+
 }
 
 

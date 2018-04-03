@@ -1,53 +1,30 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service;
-/*    */
-/*    */
+
 
 import hry.core.util.sys.ContextUtil;
 import hry.exchange.account.model.ExDmColdAccountRecord;
 import org.apache.log4j.Logger;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */ public class DmColdRecordRunable
-        /*    */ implements Runnable
-        /*    */ {
-    /* 23 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
-    /*    */
-    /*    */   private ExDmColdAccountRecord exDmColdAccountRecord;
 
-    /*    */
-    /*    */
-    /*    */
-    public DmColdRecordRunable(ExDmColdAccountRecord exDmColdAccountRecord)
-    /*    */ {
+public class DmColdRecordRunable
+        implements Runnable {
+    /* 23 */   private static final Logger log = Logger.getLogger(AccountHotRecordRunable.class);
+
+    private ExDmColdAccountRecord exDmColdAccountRecord;
+
+
+    public DmColdRecordRunable(ExDmColdAccountRecord exDmColdAccountRecord) {
         /* 30 */
         this.exDmColdAccountRecord = exDmColdAccountRecord;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    public void run()
-    /*    */ {
+
+    public void run() {
         /* 36 */
         long start = System.currentTimeMillis();
-        /*    */
+
         /* 38 */
         ExDmColdAccountRecordService exDmColdAccountRecordService = (ExDmColdAccountRecordService) ContextUtil.getBean("exDmColdAccountRecordService");
         /* 39 */
@@ -56,9 +33,9 @@ import org.apache.log4j.Logger;
         exDmColdAccountRecordService.save(this.exDmColdAccountRecord);
         /* 41 */
         long end = System.currentTimeMillis();
-        /*    */
+
     }
-    /*    */
+
 }
 
 

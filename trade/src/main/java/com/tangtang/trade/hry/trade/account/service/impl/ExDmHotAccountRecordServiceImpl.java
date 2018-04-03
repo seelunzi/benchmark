@@ -1,7 +1,6 @@
-/*    */
+
 package com.tangtang.trade.hry.trade.account.service.impl;
-/*    */
-/*    */
+
 
 import hry.core.mvc.dao.base.BaseDao;
 import hry.core.mvc.service.base.impl.BaseServiceImpl;
@@ -15,85 +14,51 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-/*    */
-@Service("exDmHotAccountRecordService")
-/*    */ public class ExDmHotAccountRecordServiceImpl
-        /*    */ extends BaseServiceImpl<ExDmHotAccountRecord, Long>
-        /*    */ implements ExDmHotAccountRecordService
-        /*    */ {
-    /*    */
-    @Resource(name = "exDigitalmoneyAccountService")
-    /*    */ public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
 
-    /*    */
-    /*    */
+@Service("exDmHotAccountRecordService")
+public class ExDmHotAccountRecordServiceImpl
+        extends BaseServiceImpl<ExDmHotAccountRecord, Long>
+        implements ExDmHotAccountRecordService {
+
+    @Resource(name = "exDigitalmoneyAccountService")
+    public ExDigitalmoneyAccountService exDigitalmoneyAccountService;
+
+
+
     @Resource(name = "exDmHotAccountRecordDao")
-    /*    */ public void setDao(BaseDao<ExDmHotAccountRecord, Long> dao)
-    /*    */ {
+    public void setDao(BaseDao<ExDmHotAccountRecord, Long> dao) {
         /* 42 */
         this.dao = dao;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    public ExDmHotAccountRecord findByAccountId(Long id)
-    /*    */ {
+
+    public ExDmHotAccountRecord findByAccountId(Long id) {
         /* 47 */
         ExDigitalmoneyAccount exDigitalmoneyAccount = (ExDigitalmoneyAccount) this.exDigitalmoneyAccountService.get(id);
-        /*    */
+
         /* 49 */
         String accountNum = exDigitalmoneyAccount.getAccountNum();
-        /*    */
+
         /* 51 */
         return null;
-        /*    */
+
     }
 
-    /*    */
-    /*    */
-    /*    */
-    public List<ExDmHotAccountRecord> findHotAccountRecordBytransactionNum(String transactionNum)
-    /*    */ {
+
+    public List<ExDmHotAccountRecord> findHotAccountRecordBytransactionNum(String transactionNum) {
         /* 57 */
         QueryFilter filter = new QueryFilter(ExDmHotAccountRecord.class);
         /* 58 */
         filter.addFilter("transactionNum=", transactionNum);
         /* 59 */
         List<ExDmHotAccountRecord> list = super.find(filter);
-        /*    */
+
         /* 61 */
         return list;
-        /*    */
+
     }
-    /*    */
+
 }
 
 
