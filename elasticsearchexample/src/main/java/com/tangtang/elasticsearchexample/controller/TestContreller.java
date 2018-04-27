@@ -6,6 +6,7 @@ import com.tangtang.elasticsearchexample.domain.Tutorial;
 import com.tangtang.elasticsearchexample.es.ArticleSearchRepository;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,9 @@ public class TestContreller {
 
     @Autowired
     private ArticleSearchRepository articleSearchRepository;
+
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
 
     @RequestMapping("/add")
     public void testSaveArticleIndex() {

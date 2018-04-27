@@ -6,6 +6,8 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
+import java.util.ArrayList;
+
 /**
  * @author tangwenbo
  * @date 2018/2/22
@@ -24,5 +26,7 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
         e.pipeline().addLast("http-chunked", new ChunkedWriteHandler());
 // 在管道中添加我们自己的接收数据实现方法
         e.pipeline().addLast("handler", new MyWebSocketServerHandler());
+
+        new ArrayList<String>().stream().filter(String.class::isInstance).map(s -> s.trim());
     }
 }

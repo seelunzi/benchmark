@@ -18,8 +18,9 @@ public class EncryptUtil {
 
     /**
      * 生成签名消息
+     *
      * @param aValue 要签名的数据
-     * @param aKey  签名的私钥
+     * @param aKey   签名的私钥
      * @return
      */
     public static String hmacSign(String aValue, String aKey) {
@@ -61,8 +62,9 @@ public class EncryptUtil {
     }
 
     public static String toHex(byte input[]) {
-        if (input == null)
+        if (input == null) {
             return null;
+        }
         StringBuffer output = new StringBuffer(input.length * 2);
         for (int i = 0; i < input.length; i++) {
             int current = input[i] & 0xff;

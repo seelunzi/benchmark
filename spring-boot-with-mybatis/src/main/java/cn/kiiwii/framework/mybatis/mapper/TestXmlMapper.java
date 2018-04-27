@@ -7,20 +7,20 @@ import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 
 /**
- * Created by zhong on 2016/12/22.
+ * @author tang
  */
 public interface TestXmlMapper {
 
-    public int addMoney(int userId, float money);
+    int addMoney(int userId, float money);
 
-    public int minusMoney(int userId, float money);
+    int minusMoney(int userId, float money);
 
     @CacheEvict(value = {"indexCache"}, allEntries = true, beforeInvocation = true)
-    public int insertAccount(Account account);
+    int insertAccount(Account account);
 
     @Cacheable(value = "indexCache", key = "'xmlgetAccountById'+#id")
-    public Account getAccountById(int id);
+    Account getAccountById(int id);
 
     @Cacheable(value = "indexCache", key = "'xmlfindAccountsById'+#id")
-    public List<Account> findAccountsById(int id);
+    List<Account> findAccountsById(int id);
 }

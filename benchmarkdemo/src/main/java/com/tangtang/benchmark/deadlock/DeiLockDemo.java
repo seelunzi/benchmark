@@ -1,8 +1,14 @@
 package com.tangtang.benchmark.deadlock;
 
+/***
+ * @author tang
+ * */
 public class DeiLockDemo {
-    // 深入分析一下死锁产生的原因
-    // 听一下别人是怎么分析这个问题的
+
+    /***
+     * 深入分析一下死锁产生的原因
+     * 听一下别人是怎么分析这个问题的
+     */
     public static void main(String[] args) {
         DeiLock dl1 = new DeiLock(true);
         /**

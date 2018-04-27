@@ -2,7 +2,9 @@ package com.tangtang.benchmark.deadlock;
 
 public class DeiLock extends Thread {
 
-    // 设置一个旗标,控制线程的执行与停止
+    /***
+     * 设置一个旗标,控制线程的执行与停止
+     */
     private Boolean flag;
 
     public DeiLock(Boolean flag) {

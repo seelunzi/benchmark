@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 /**
- * Created by zhong on 2016/12/22.
+ * @author tang
  */
 public interface TestMapper {
 

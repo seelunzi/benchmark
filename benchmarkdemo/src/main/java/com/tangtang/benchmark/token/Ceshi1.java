@@ -21,7 +21,6 @@ public class Ceshi1 {
 //        PrivateKey be34f4e5a973d73f91d16b6d279034dc1 = RSAUtils.loadPrivateKey("be34f4e5a973d73f91d16b6d279034dc");
 //
 //        byte[] bytes = RSAUtils.encryptData("我是一段测试aaaa".getBytes(), be34f4e5a973d73f91d16b6d279034dc1);
-//
 ////        RSAUtils.
 //        String encode = Base64Utils.encode(bytes);
 //        System.out.print(encode);

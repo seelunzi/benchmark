@@ -123,7 +123,9 @@ public class SnowflakeIdWorker {
         timestamp = tilNextMillis(lastTimestamp);
       }
     }
-    //时间戳改变，毫秒内序列重置
+    /***
+     * 时间戳改变，毫秒内序列重置
+     */
     else {
       sequence = 0L;
     }
@@ -167,9 +169,7 @@ public class SnowflakeIdWorker {
    * 测试
    */
   public static void main(String[] args) {
-
     ArrayList<String> s = new ArrayList<>();
-
 
     SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);
     for (int i = 0; i < 100000; i++) {
